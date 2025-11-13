@@ -5,160 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trilha Morro da Mesa 23 de Novembro - Trilheiros de Rondonópolis</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #000;
-    color: #fff;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-}
-h1 {
-    color: #fff;
-    font-size: 2em;
-}
-h2 {
-    color: #fff;
-    font-size: 1.3em;
-    margin-bottom: 20px;
-}
-.box {
-    max-width: 700px;
-    margin: auto;
-    background: #111;
-    padding: 20px;
-    border-radius: 10px;
-}
-input[type="text"] {
-    padding: 10px;
-    margin: 5px 0;
-    width: 90%;
-    border-radius: 6px;
-    border: none;
-}
-.termo {
-    width: 90%;
-    height: 300px;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 6px;
-    border: none;
-    background: #222;
-    color: #fff;
-    resize: none;
-    overflow-y: scroll;
-}
-button {
-    padding: 15px 25px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    background: #2e7d32;
-    color: #fff;
-    font-size: 1.1em;
-    margin-top: 10px;
-    width: 90%;
-}
-button:disabled {
-    background: #444;
-    color: #999;
-    cursor: not-allowed;
-}
-.status {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #fff;
-}
-.checkbox-label {
-    display: block;
-    margin: 10px 0;
-    font-size: 1em;
-    cursor: pointer;
-}
-@media(max-width:600px){
-    .termo {
-        height: 250px;
-    }
-    button {
-        font-size: 1em;
-        padding: 12px 20px;
-    }
-}
+body { font-family: Arial; background: #000; color: #fff; text-align:center; margin:0; padding:20px; }
+h1 { font-size:2em; color:#fff; }
+h2 { font-size:1.3em; color:#fff; margin-bottom:20px; }
+.box { max-width:700px; margin:auto; background:#111; padding:20px; border-radius:10px; }
+input[type="text"] { padding:10px; margin:5px 0; width:90%; border-radius:6px; border:none; }
+.termo { width:90%; height:300px; padding:10px; margin:10px 0; border-radius:6px; border:none; background:#222; color:#fff; resize:none; overflow-y:scroll; }
+button { padding:15px 25px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; background:#2e7d32; color:#fff; font-size:1.1em; margin-top:10px; width:90%; }
+button:disabled { background:#444; color:#999; cursor:not-allowed; }
+.checkbox-label { display:block; margin:10px 0; font-size:1em; cursor:pointer; }
+.status { margin-top:15px; font-weight:bold; color:#fff; }
+@media(max-width:600px){ .termo { height:250px; } button { font-size:1em; padding:12px 20px; } }
 </style>
 </head>
 <body>
 
 <div class="box">
 <h1>TRILHA MORRO DA MESA 23 DE NOVEMBRO</h1>
-<h2>Trilheiros de Rondonópolis</h2>
-
-<form id="reservaForm">
-<input type="text" id="nome" placeholder="Digite seu nome completo" required><br>
-
-<textarea class="termo" readonly>
-TERMO DE RESPONSABILIDADE E INSTRUÇÕES
-
-O percurso apresenta nível médio a difícil, com trechos íngremes e escorregadios, exigindo atenção e preparo físico adequado.
-
-É obrigatório o uso de calçados apropriados, roupas confortáveis, protetor solar e água.
-
-É proibido o uso de caixas de som e o consumo de bebidas alcoólicas; qualquer descumprimento poderá resultar na exclusão imediata do participante do grupo.
-
-Todos devem respeitar a natureza, não deixar lixo e seguir rigorosamente as orientações do guia.
-
-A organização se reserva o direito de afastar do grupo qualquer pessoa que comprometa a segurança, o bem-estar ou o bom andamento do passeio.
-
-A organização não se responsabiliza por acidentes causados por imprudência, desrespeito às normas ou falta de preparo físico.
-
-Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.
-
-É indispensável estar em boas condições de saúde; pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou histórico de desmaios/síncopes não devem participar.
-
-Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.
-
-Crianças menores de 14 anos não serão permitidas.
-
-Declaro que participarei da trilha/passeio por minha livre e espontânea vontade, estou ciente dos riscos envolvidos e isento os organizadores de qualquer responsabilidade por acidentes decorrentes da atividade, exceto nos casos de comprovada negligência. Declaro também que estou em condições físicas adequadas para a prática da atividade.
-</textarea>
-
-<label class="checkbox-label">
-<input type="checkbox" id="aceite"> Li e aceito o termo de responsabilidade
-</label>
-
-<button type="submit" id="enviarBtn" disabled>Confirmar e Entrar no Grupo do WhatsApp</button>
-</form>
-
-<p class="status" id="status">Preencha seu nome, leia o termo e clique no botão para entrar no grupo.</p>
-</div>
-
-<script>
-const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7"; 
-const nomeInput = document.getElementById("nome");
-const aceiteCheckbox = document.getElementById("aceite");
-const enviarBtn = document.getElementById("enviarBtn");
-const statusEl = document.getElementById("status");
-
-function checkForm() {
-    enviarBtn.disabled = !aceiteCheckbox.checked || !nomeInput.value.trim();
-}
-
-aceiteCheckbox.addEventListener("change", checkForm);
-nomeInput.addEventListener("input", checkForm);
-
-document.getElementById("reservaForm").addEventListener("submit", e => {
-    e.preventDefault();
-    const nome = nomeInput.value.trim();
-    if(!nome || !aceiteCheckbox.checked){
-        alert("Preencha seu nome e aceite o termo de responsabilidade.");
-        return;
-    }
-
-    const msg = `Olá, meu nome é ${nome} e li e aceitei o termo de responsabilidade do passeio.`;
-    window.open(`${JOIN_LINK}?text=${encodeURIComponent(msg)}`, "_blank");
-    statusEl.textContent = "Clique no botão acima e entre no grupo. Aguarde confirmação.";
-});
-</script>
-</body>
-</html>
-
+<h2>Trilheiros de Rondonó
