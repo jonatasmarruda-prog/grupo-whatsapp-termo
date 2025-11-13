@@ -19,7 +19,7 @@ h1 {
 }
 h2 {
     color: #fff;
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-bottom: 20px;
 }
 .box {
@@ -38,7 +38,7 @@ input[type="text"] {
 }
 .termo {
     width: 90%;
-    height: 400px;
+    height: 300px;
     padding: 10px;
     margin: 10px 0;
     border-radius: 6px;
@@ -58,6 +58,7 @@ button {
     color: #fff;
     font-size: 1.1em;
     margin-top: 10px;
+    width: 90%;
 }
 button:disabled {
     background: #444;
@@ -74,6 +75,15 @@ button:disabled {
     margin: 10px 0;
     font-size: 1em;
     cursor: pointer;
+}
+@media(max-width:600px){
+    .termo {
+        height: 250px;
+    }
+    button {
+        font-size: 1em;
+        padding: 12px 20px;
+    }
 }
 </style>
 </head>
@@ -116,14 +126,13 @@ Declaro que participarei da trilha/passeio por minha livre e espontânea vontade
 <input type="checkbox" id="aceite"> Li e aceito o termo de responsabilidade
 </label>
 
-<button type="submit" id="enviarBtn" disabled>Clique aqui para entrar no grupo do WhatsApp</button>
+<button type="submit" id="enviarBtn" disabled>Confirmar e Entrar no Grupo do WhatsApp</button>
 </form>
 
 <p class="status" id="status">Preencha seu nome, leia o termo e clique no botão para entrar no grupo.</p>
 </div>
 
 <script>
-const WEBAPP_URL = "COLE_AQUI_SEU_WEBAPP_URL"; // Substitua pelo URL do seu Web App Apps Script
 const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7"; 
 const nomeInput = document.getElementById("nome");
 const aceiteCheckbox = document.getElementById("aceite");
@@ -137,7 +146,7 @@ function checkForm() {
 aceiteCheckbox.addEventListener("change", checkForm);
 nomeInput.addEventListener("input", checkForm);
 
-document.getElementById("reservaForm").addEventListener("submit", async e => {
+document.getElementById("reservaForm").addEventListener("submit", e => {
     e.preventDefault();
     const nome = nomeInput.value.trim();
     if(!nome || !aceiteCheckbox.checked){
@@ -145,25 +154,6 @@ document.getElementById("reservaForm").addEventListener("submit", async e => {
         return;
     }
 
-    // Registrar na planilha
-    try {
-        const res = await fetch(WEBAPP_URL, {
-            method: "POST",
-            headers: {"Content-Type": "application/x-www-form-urlencoded"},
-            body: `nome=${encodeURIComponent(nome)}&termo=Sim`
-        });
-        const j = await res.json();
-        if(!j.success){
-            alert("Erro ao registrar na planilha. Tente novamente.");
-            return;
-        }
-    } catch(err) {
-        alert("Erro ao registrar na planilha. Tente novamente.");
-        console.error(err);
-        return;
-    }
-
-    // Enviar mensagem WhatsApp
     const msg = `Olá, meu nome é ${nome} e li e aceitei o termo de responsabilidade do passeio.`;
     window.open(`${JOIN_LINK}?text=${encodeURIComponent(msg)}`, "_blank");
     statusEl.textContent = "Clique no botão acima e entre no grupo. Aguarde confirmação.";
@@ -171,3 +161,4 @@ document.getElementById("reservaForm").addEventListener("submit", async e => {
 </script>
 </body>
 </html>
+
