@@ -3,167 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trilha Morro da Mesa - 23 de Novembro</title>
+<title>Trilha Morro da Mesa 23 de Novembro - Trilheiros de Rondonópolis</title>
 <style>
-  body {
-    background-color: #000;
-    color: #fff;
+body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    background: #000;
+    color: #fff;
+    margin: 0;
     padding: 20px;
-  }
-  h1 {
-    color: #00ffd5;
-    text-transform: uppercase;
-  }
-  .form-container {
-    background-color: #111;
-    padding: 25px;
+    text-align: center;
+}
+h1 {
+    color: #fff;
+    font-size: 2em;
+}
+h2 {
+    color: #fff;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+.box {
+    max-width: 700px;
+    margin: auto;
+    background: #111;
+    padding: 20px;
     border-radius: 10px;
+}
+input[type="text"] {
+    padding: 10px;
+    margin: 5px 0;
     width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
-    box-shadow: 0 0 15px #00ffd5;
-  }
-  textarea {
-    width: 100%;
-    height: 250px;
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #00ffd5;
-    padding: 10px;
-    border-radius: 5px;
-    overflow-y: scroll;
-    resize: none;
-  }
-  input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #00ffd5;
-    border-radius: 5px;
-    background-color: #000;
-    color: #fff;
-  }
-  button {
-    background-color: #00ffd5;
-    color: #000;
+    border-radius: 6px;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
+}
+.termo {
+    width: 90%;
+    height: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: #fff;
+    resize: none;
+    overflow-y: scroll;
+}
+button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
     cursor: pointer;
-    margin-top: 15px;
-  }
-  button:disabled {
-    background-color: #333;
-    cursor: not-allowed;
-  }
-  .checkbox {
+    background: #2e7d32;
+    color: #fff;
+    font-size: 1.1em;
     margin-top: 10px;
-  }
-  #vagaInfo {
+}
+button:disabled {
+    background: #444;
+    color: #999;
+    cursor: not-allowed;
+}
+.status {
     margin-top: 15px;
-    color: #00ffd5;
-  }
+    font-weight: bold;
+    color: #fff;
+}
+.checkbox-label {
+    display: block;
+    margin: 10px 0;
+    font-size: 1em;
+    cursor: pointer;
+}
 </style>
 </head>
 <body>
-  <h1>TRILHA MORRO DA MESA - 23 DE NOVEMBRO</h1>
-  <p>Leia atentamente o termo abaixo antes de confirmar sua vaga.</p>
 
-  <div class="form-container">
-    <textarea id="termo" readonly>
-TERMO DE CIÊNCIA E RESPONSABILIDADE – TRILHA E PASSEIOS - TRILHEIROS DE RONDONÓPOLIS
+<div class="box">
+<h1>TRILHA MORRO DA MESA 23 DE NOVEMBRO</h1>
+<h2>Trilheiros de Rondonópolis</h2>
 
-Leia com atenção as informações abaixo sobre os riscos, nível de dificuldade e regras do passeio. Ao preencher este formulário, você declara que está ciente, concorda e assume total responsabilidade pela sua participação.
+<form id="reservaForm">
+<input type="text" id="nome" placeholder="Digite seu nome completo" required><br>
 
-REGRAS E CONDIÇÕES:
-- O percurso tem nível médio a avançado, com trechos íngremes e escorregadios.
-- É obrigatório o uso de calçados adequados, água, protetor solar e roupas confortáveis.
-- É proibido o uso de caixas de som para preservar o ambiente.
-- O participante deve respeitar a natureza, não deixar lixo e seguir as orientações do guia.
-- A organização não se responsabiliza por acidentes causados por imprudência ou desrespeito às regras.
-- Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.
-- É indispensável estar em boas condições de saúde para participar da trilha.
-- Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou com histórico de desmaios/síncopes não são orientadas a realizar essa atividade.
-- Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.
-- Crianças menores de 14 anos não serão permitidas.
+<textarea class="termo" readonly>
+TERMO DE RESPONSABILIDADE E INSTRUÇÕES
 
-DECLARAÇÃO FINAL:
-Eu, abaixo assinado, declaro que participarei da trilha/passeio por minha livre e espontânea vontade. Estou ciente dos riscos envolvidos e isento os organizadores de qualquer responsabilidade por acidentes decorrentes da atividade, exceto nos casos de comprovada negligência. Declaro também que estou em condições físicas adequadas para a prática da atividade.
-    </textarea>
+O percurso apresenta nível médio a difícil, com trechos íngremes e escorregadios, exigindo atenção e preparo físico adequado.
 
-    <input type="text" id="nome" placeholder="Digite seu nome completo">
-    <div class="checkbox">
-      <input type="checkbox" id="aceito" disabled>
-      <label for="aceito">Li e aceito o termo de responsabilidade</label>
-    </div>
-    <button id="confirmar" disabled>Confirmar e Entrar no Grupo</button>
-    <p id="vagaInfo">Carregando vagas...</p>
-  </div>
+É obrigatório o uso de calçados apropriados, roupas confortáveis, protetor solar e água.
+
+É proibido o uso de caixas de som e o consumo de bebidas alcoólicas; qualquer descumprimento poderá resultar na exclusão imediata do participante do grupo.
+
+Todos devem respeitar a natureza, não deixar lixo e seguir rigorosamente as orientações do guia.
+
+A organização se reserva o direito de afastar do grupo qualquer pessoa que comprometa a segurança, o bem-estar ou o bom andamento do passeio.
+
+A organização não se responsabiliza por acidentes causados por imprudência, desrespeito às normas ou falta de preparo físico.
+
+Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.
+
+É indispensável estar em boas condições de saúde; pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou histórico de desmaios/síncopes não devem participar.
+
+Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.
+
+Crianças menores de 14 anos não serão permitidas.
+
+Declaro que participarei da trilha/passeio por minha livre e espontânea vontade, estou ciente dos riscos envolvidos e isento os organizadores de qualquer responsabilidade por acidentes decorrentes da atividade, exceto nos casos de comprovada negligência. Declaro também que estou em condições físicas adequadas para a prática da atividade.
+</textarea>
+
+<label class="checkbox-label">
+<input type="checkbox" id="aceite"> Li e aceito o termo de responsabilidade
+</label>
+
+<button type="submit" id="enviarBtn" disabled>Clique aqui para entrar no grupo do WhatsApp</button>
+</form>
+
+<p class="status" id="status">Preencha seu nome, leia o termo e clique no botão para entrar no grupo.</p>
+</div>
 
 <script>
-  const termo = document.getElementById("termo");
-  const checkbox = document.getElementById("aceito");
-  const botao = document.getElementById("confirmar");
-  const nomeInput = document.getElementById("nome");
-  const vagaInfo = document.getElementById("vagaInfo");
-  const maxVagas = 75;
-  const grupoLink = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
-  const scriptURL = "https://script.google.com/macros/s/AKfycbx2eQenBBxT1vR3mD65XOv_4Y0GUIjVt3pLt8ISJl43dGTFC57Ljl6T4XzOYXIk__Gx/exec";
+const WEBAPP_URL = "COLE_AQUI_SEU_WEBAPP_URL"; // Substitua pelo URL do seu Web App Apps Script
+const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7"; 
+const nomeInput = document.getElementById("nome");
+const aceiteCheckbox = document.getElementById("aceite");
+const enviarBtn = document.getElementById("enviarBtn");
+const statusEl = document.getElementById("status");
 
-  // Libera checkbox só depois que rolar até o final
-  termo.addEventListener("scroll", () => {
-    if (termo.scrollTop + termo.clientHeight >= termo.scrollHeight - 10) {
-      checkbox.disabled = false;
-    }
-  });
+function checkForm() {
+    enviarBtn.disabled = !aceiteCheckbox.checked || !nomeInput.value.trim();
+}
 
-  checkbox.addEventListener("change", () => {
-    botao.disabled = !checkbox.checked || nomeInput.value.trim() === "";
-  });
+aceiteCheckbox.addEventListener("change", checkForm);
+nomeInput.addEventListener("input", checkForm);
 
-  nomeInput.addEventListener("input", () => {
-    botao.disabled = !checkbox.checked || nomeInput.value.trim() === "";
-  });
-
-  async function carregarVagas() {
-    try {
-      const res = await fetch(scriptURL + "?action=getCount");
-      const data = await res.json();
-      const vagasRestantes = maxVagas - data.count;
-      vagaInfo.textContent = vagasRestantes > 0
-        ? `Vagas restantes: ${vagasRestantes}`
-        : "Grupo fechado. Todas as vagas foram preenchidas.";
-      botao.disabled = vagasRestantes <= 0;
-    } catch {
-      vagaInfo.textContent = "Não foi possível carregar as vagas.";
-    }
-  }
-
-  carregarVagas();
-
-  botao.addEventListener("click", async () => {
+document.getElementById("reservaForm").addEventListener("submit", async e => {
+    e.preventDefault();
     const nome = nomeInput.value.trim();
-    if (!nome || !checkbox.checked) return alert("Preencha seu nome e aceite o termo.");
-    try {
-      const res = await fetch(scriptURL, {
-        method: "POST",
-        body: JSON.stringify({ nome }),
-        headers: { "Content-Type": "application/json" }
-      });
-      const result = await res.json();
-      if (result.success) {
-        alert("Termo confirmado com sucesso! Você será redirecionado para o grupo.");
-        window.location.href = grupoLink;
-      } else {
-        alert("Erro ao salvar. Tente novamente.");
-      }
-    } catch {
-      alert("Erro de conexão. Tente novamente.");
+    if(!nome || !aceiteCheckbox.checked){
+        alert("Preencha seu nome e aceite o termo de responsabilidade.");
+        return;
     }
-  });
+
+    // Registrar na planilha
+    try {
+        const res = await fetch(WEBAPP_URL, {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            body: `nome=${encodeURIComponent(nome)}&termo=Sim`
+        });
+        const j = await res.json();
+        if(!j.success){
+            alert("Erro ao registrar na planilha. Tente novamente.");
+            return;
+        }
+    } catch(err) {
+        alert("Erro ao registrar na planilha. Tente novamente.");
+        console.error(err);
+        return;
+    }
+
+    // Enviar mensagem WhatsApp
+    const msg = `Olá, meu nome é ${nome} e li e aceitei o termo de responsabilidade do passeio.`;
+    window.open(`${JOIN_LINK}?text=${encodeURIComponent(msg)}`, "_blank");
+    statusEl.textContent = "Clique no botão acima e entre no grupo. Aguarde confirmação.";
+});
 </script>
 </body>
 </html>
