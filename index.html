@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar no Grupo - Trilheiros de Rondonópolis</title>
+<style>
+body { font-family: Arial, sans-serif; background:#0b0b0b; color:#fff; padding:20px; text-align:center;}
+h1 { color:#fff; }
+.box { max-width:600px; margin:auto; background:#151515; padding:20px; border-radius:10px; }
+input { padding:10px; margin:5px; width:90%; border-radius:6px; border:none; }
+button { padding:12px 20px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-top:10px; background:#25D366; color:#fff; }
+button:disabled { background:#444; color:#999; cursor:not-allowed; }
+.status { margin-top:10px; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<div class="box">
+<h1>Entrar no Grupo WhatsApp</h1>
+<p>Trilheiros de Rondonópolis</p>
+
+<form id="grupoForm">
+<input type="text" id="nome" placeholder="Seu nome completo" required><br>
+<div>
+<input type="checkbox" id="aceite"> Li e aceito o termo de responsabilidade
+</div><br>
+<button type="submit" id="entrarBtn" disabled>Enviar e Entrar no Grupo</button>
+</form>
+
+<p class="status" id="status">Verificando vagas disponíveis...</p>
+
+</div>
+
+<script>
+const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7"; // Link do grupo
+const MAX_PARTICIPANTES = 75;
+let totalParticipantes = 0; // Contador local, pode substituir por Apps Script se quiser centralizado
+
+const nomeInput = document.getElementById("nome");
+const aceiteCheckbox = document.getElementById("aceite");
+const entrarBtn = document.getElementById("entrarBtn");
+const statusEl = document.getElementById("status");
+
+function atualizarStatus() {
+    const restantes = MAX_PARTICIPANTES - totalParticipantes;
+    if(restantes > 0){
+        statusEl.textContent = `${restantes} vagas restantes para entrar no grupo.`;
+        entrarBtn.disabled = !aceiteCheckbox.checked;
+    } else {
+        statusEl.textContent = "Limite de participantes atingido. Grupo fechado.";
+        entrarBtn.disabled = true;
+    }
+}
+
+aceiteCheckbox.addEventListener("change", atualizarStatus);
+
+document.getElementById("grupoForm").addEventListener("submit", e => {
+    e.preventDefault();
+    if(!aceiteCheckbox.checked){ alert("Aceite o termo de responsabilidade."); return; }
+    const nome = nomeInput.value.trim();
+    if(!nome){ alert("Digite seu nome."); return; }
+    
+    // Aumenta contagem local
+    totalParticipantes++;
+    atualizarStatus();
+
+    // Abre link do grupo WhatsApp
+    window.open(JOIN_LINK, "_blank");
+
+    // Gera mensagem automática no console (opcional)
+    const msg = `Olá, meu nome é ${nome}. Aceitei o termo de responsabilidade e quero participar do grupo.`;
+    console.log(msg);
+
+    // Limpa formulário
+    nomeInput.value = "";
+    aceiteCheckbox.checked = false;
+});
+
+atualizarStatus();
+</script>
+
+</body>
+</html>
