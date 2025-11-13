@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TRILHA MORRO DA MESA - 23 DE NOVEMBRO</title>
+<title>Trilha Morro da Mesa - 23 de Novembro</title>
 <style>
   body {
     background-color: #000;
@@ -13,100 +13,157 @@
     padding: 20px;
   }
   h1 {
-    font-size: 26px;
-    color: #00ffcc;
-    margin-bottom: 20px;
+    color: #00ffd5;
+    text-transform: uppercase;
   }
-  form {
+  .form-container {
     background-color: #111;
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
-    max-width: 400px;
-    margin: 0 auto;
-    box-shadow: 0 0 10px #00ffcc;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 0 15px #00ffd5;
+  }
+  textarea {
+    width: 100%;
+    height: 250px;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #00ffd5;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-y: scroll;
+    resize: none;
   }
   input[type="text"] {
-    width: 90%;
+    width: 100%;
     padding: 10px;
-    margin: 10px 0;
-    border: none;
+    margin-top: 10px;
+    border: 1px solid #00ffd5;
     border-radius: 5px;
+    background-color: #000;
+    color: #fff;
   }
   button {
-    background-color: #00ffcc;
+    background-color: #00ffd5;
+    color: #000;
     border: none;
     padding: 10px 20px;
-    color: #000;
-    font-weight: bold;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-  }
-  button:hover {
-    background-color: #00ffaa;
-  }
-  #contador {
-    font-size: 18px;
     margin-top: 15px;
+  }
+  button:disabled {
+    background-color: #333;
+    cursor: not-allowed;
+  }
+  .checkbox {
+    margin-top: 10px;
+  }
+  #vagaInfo {
+    margin-top: 15px;
+    color: #00ffd5;
   }
 </style>
 </head>
 <body>
+  <h1>TRILHA MORRO DA MESA - 23 DE NOVEMBRO</h1>
+  <p>Leia atentamente o termo abaixo antes de confirmar sua vaga.</p>
 
-<h1>TRILHA MORRO DA MESA - 23 DE NOVEMBRO</h1>
-<p>Preencha seu nome e confirme o termo de responsabilidade para garantir sua vaga.</p>
+  <div class="form-container">
+    <textarea id="termo" readonly>
+TERMO DE CIÊNCIA E RESPONSABILIDADE – TRILHA E PASSEIOS - TRILHEIROS DE RONDONÓPOLIS
 
-<form id="reservaForm">
-  <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required><br>
+Leia com atenção as informações abaixo sobre os riscos, nível de dificuldade e regras do passeio. Ao preencher este formulário, você declara que está ciente, concorda e assume total responsabilidade pela sua participação.
 
-  <label>
-    <input type="checkbox" id="aceite" required>
-    Li e aceito o <a href="#" style="color:#00ffcc;">Termo de Responsabilidade</a>
-  </label><br><br>
+REGRAS E CONDIÇÕES:
+- O percurso tem nível médio a avançado, com trechos íngremes e escorregadios.
+- É obrigatório o uso de calçados adequados, água, protetor solar e roupas confortáveis.
+- É proibido o uso de caixas de som para preservar o ambiente.
+- O participante deve respeitar a natureza, não deixar lixo e seguir as orientações do guia.
+- A organização não se responsabiliza por acidentes causados por imprudência ou desrespeito às regras.
+- Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.
+- É indispensável estar em boas condições de saúde para participar da trilha.
+- Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou com histórico de desmaios/síncopes não são orientadas a realizar essa atividade.
+- Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.
+- Crianças menores de 14 anos não serão permitidas.
 
-  <button type="submit">Confirmar e Entrar no Grupo</button>
-</form>
+DECLARAÇÃO FINAL:
+Eu, abaixo assinado, declaro que participarei da trilha/passeio por minha livre e espontânea vontade. Estou ciente dos riscos envolvidos e isento os organizadores de qualquer responsabilidade por acidentes decorrentes da atividade, exceto nos casos de comprovada negligência. Declaro também que estou em condições físicas adequadas para a prática da atividade.
+    </textarea>
 
-<p id="contador">Carregando vagas...</p>
+    <input type="text" id="nome" placeholder="Digite seu nome completo">
+    <div class="checkbox">
+      <input type="checkbox" id="aceito" disabled>
+      <label for="aceito">Li e aceito o termo de responsabilidade</label>
+    </div>
+    <button id="confirmar" disabled>Confirmar e Entrar no Grupo</button>
+    <p id="vagaInfo">Carregando vagas...</p>
+  </div>
 
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbx2eQenBBxT1vR3mD65XOv_4Y0GUIjVt3pLt8ISJl43dGTFC57Ljl6T4XzOYXIk__Gx/exec';
-  const form = document.getElementById('reservaForm');
-  const contador = document.getElementById('contador');
-  const linkGrupo = 'https://chat.whatsapp.com/'; // coloque o link do grupo
+  const termo = document.getElementById("termo");
+  const checkbox = document.getElementById("aceito");
+  const botao = document.getElementById("confirmar");
+  const nomeInput = document.getElementById("nome");
+  const vagaInfo = document.getElementById("vagaInfo");
+  const maxVagas = 75;
+  const grupoLink = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbx2eQenBBxT1vR3mD65XOv_4Y0GUIjVt3pLt8ISJl43dGTFC57Ljl6T4XzOYXIk__Gx/exec";
+
+  // Libera checkbox só depois que rolar até o final
+  termo.addEventListener("scroll", () => {
+    if (termo.scrollTop + termo.clientHeight >= termo.scrollHeight - 10) {
+      checkbox.disabled = false;
+    }
+  });
+
+  checkbox.addEventListener("change", () => {
+    botao.disabled = !checkbox.checked || nomeInput.value.trim() === "";
+  });
+
+  nomeInput.addEventListener("input", () => {
+    botao.disabled = !checkbox.checked || nomeInput.value.trim() === "";
+  });
 
   async function carregarVagas() {
     try {
-      const response = await fetch(scriptURL + '?action=contagem');
-      const data = await response.json();
-      contador.textContent = `Vagas disponíveis: ${data.vagas || 'N/D'}`;
-    } catch (e) {
-      contador.textContent = 'Não foi possível carregar as vagas.';
+      const res = await fetch(scriptURL + "?action=getCount");
+      const data = await res.json();
+      const vagasRestantes = maxVagas - data.count;
+      vagaInfo.textContent = vagasRestantes > 0
+        ? `Vagas restantes: ${vagasRestantes}`
+        : "Grupo fechado. Todas as vagas foram preenchidas.";
+      botao.disabled = vagasRestantes <= 0;
+    } catch {
+      vagaInfo.textContent = "Não foi possível carregar as vagas.";
     }
   }
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const nome = document.getElementById('nome').value;
-    const aceite = document.getElementById('aceite').checked;
-
-    if (!aceite) {
-      alert('É necessário aceitar o termo de responsabilidade.');
-      return;
-    }
-
-    fetch(scriptURL, {
-      method: 'POST',
-      body: new FormData(form)
-    })
-    .then(() => {
-      alert('Cadastro confirmado! Agora entre no grupo do WhatsApp.');
-      window.location.href = linkGrupo;
-    })
-    .catch(error => alert('Erro ao enviar. Tente novamente.'));
-  });
-
   carregarVagas();
-</script>
 
+  botao.addEventListener("click", async () => {
+    const nome = nomeInput.value.trim();
+    if (!nome || !checkbox.checked) return alert("Preencha seu nome e aceite o termo.");
+    try {
+      const res = await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify({ nome }),
+        headers: { "Content-Type": "application/json" }
+      });
+      const result = await res.json();
+      if (result.success) {
+        alert("Termo confirmado com sucesso! Você será redirecionado para o grupo.");
+        window.location.href = grupoLink;
+      } else {
+        alert("Erro ao salvar. Tente novamente.");
+      }
+    } catch {
+      alert("Erro de conexão. Tente novamente.");
+    }
+  });
+</script>
 </body>
 </html>
