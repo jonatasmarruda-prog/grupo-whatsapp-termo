@@ -5,21 +5,149 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trilha Morro da Mesa 23 de Novembro - Trilheiros de Rondonópolis</title>
 <style>
-body { font-family: Arial; background: #000; color: #fff; text-align:center; margin:0; padding:20px; }
-h1 { font-size:2em; color:#fff; }
-h2 { font-size:1.3em; color:#fff; margin-bottom:20px; }
-.box { max-width:700px; margin:auto; background:#111; padding:20px; border-radius:10px; }
-input[type="text"] { padding:10px; margin:5px 0; width:90%; border-radius:6px; border:none; }
-.termo { width:90%; height:300px; padding:10px; margin:10px 0; border-radius:6px; border:none; background:#222; color:#fff; resize:none; overflow-y:scroll; }
-button { padding:15px 25px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; background:#2e7d32; color:#fff; font-size:1.1em; margin-top:10px; width:90%; }
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(180deg, #000000, #111111);
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+h1 { font-size: 2.5em; color:#fff; margin-bottom:5px; text-shadow:0 0 10px #28a745; }
+h2 { font-size: 1.5em; color:#fff; margin-bottom:20px; text-shadow:0 0 8px #28a745; }
+.box {
+    max-width: 750px;
+    margin:auto;
+    background:#111;
+    padding:25px;
+    border-radius:15px;
+    box-shadow: 0 0 20px rgba(0,255,0,0.5);
+    transition: transform 0.3s;
+}
+.box:hover { transform: scale(1.02); }
+input[type="text"] {
+    padding:12px; margin:10px 0; width:95%; border-radius:8px; border:none; font-size:1em;
+}
+.termo {
+    width:95%; height:320px; padding:12px; margin:15px 0;
+    border-radius:8px; border:none; background:#222; color:#fff; resize:none; overflow-y:scroll; font-size:0.95em;
+}
+button {
+    padding:18px 30px; border:none; border-radius:10px; font-weight:bold;
+    cursor:pointer; background:#28a745; color:#fff; font-size:1.2em;
+    margin-top:15px; width:95%; transition: all 0.3s ease;
+}
+button:hover:not(:disabled) {
+    background:#1e7e34; transform: scale(1.05);
+}
 button:disabled { background:#444; color:#999; cursor:not-allowed; }
-.checkbox-label { display:block; margin:10px 0; font-size:1em; cursor:pointer; }
-.status { margin-top:15px; font-weight:bold; color:#fff; }
-@media(max-width:600px){ .termo { height:250px; } button { font-size:1em; padding:12px 20px; } }
+.checkbox-label { display:block; margin:15px 0; font-size:1.1em; cursor:pointer; }
+.status { margin-top:20px; font-weight:bold; font-size:1.1em; color:#fff; }
+@media(max-width:600px){ .termo{height:250px;} button{font-size:1em;padding:14px 20px;} h1{font-size:2em;} h2{font-size:1.2em;} }
 </style>
 </head>
 <body>
 
-<div class="box">
+<div class="box" id="mainBox">
 <h1>TRILHA MORRO DA MESA 23 DE NOVEMBRO</h1>
-<h2>Trilheiros de Rondonó
+<h2>Trilheiros de Rondonópolis</h2>
+
+<form id="reservaForm">
+<input type="text" id="nome" placeholder="Digite seu nome completo" required><br>
+
+<textarea class="termo" readonly>
+TERMO DE RESPONSABILIDADE E INSTRUÇÕES
+
+O percurso apresenta nível médio a difícil, com trechos íngremes e escorregadios, exigindo atenção e preparo físico adequado.
+
+É obrigatório o uso de calçados apropriados, roupas confortáveis, protetor solar e água.
+
+É proibido o uso de caixas de som e o consumo de bebidas alcoólicas; qualquer descumprimento poderá resultar na exclusão imediata do participante do grupo.
+
+Todos devem respeitar a natureza, não deixar lixo e seguir rigorosamente as orientações do guia.
+
+A organização se reserva o direito de afastar do grupo qualquer pessoa que comprometa a segurança, o bem-estar ou o bom andamento do passeio.
+
+A organização não se responsabiliza por acidentes causados por imprudência, desrespeito às normas ou falta de preparo físico.
+
+Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.
+
+É indispensável estar em boas condições de saúde; pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou histórico de desmaios/síncopes não devem participar.
+
+Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.
+
+Crianças menores de 14 anos não serão permitidas.
+
+Declaro que participarei da trilha/passeio por minha livre e espontânea vontade, estou ciente dos riscos envolvidos e isento os organizadores de qualquer responsabilidade por acidentes decorrentes da atividade.
+</textarea>
+
+<label class="checkbox-label">
+<input type="checkbox" id="aceite"> Li e aceito o termo de responsabilidade
+</label>
+
+<button type="submit" id="enviarBtn" disabled>Entrar no Grupo do WhatsApp</button>
+</form>
+
+<p class="status" id="status"></p>
+</div>
+
+<script>
+const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
+const MAX_PARTICIPANTES = 75;
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz9m_YrXZ3pCNTsqnBX9XuNuTIINjQ0ErPpmkUyU9FkkYKv9bI5fWP2w93Ui9VjA1hs8Q/exec";
+
+const nomeInput = document.getElementById("nome");
+const aceiteCheckbox = document.getElementById("aceite");
+const enviarBtn = document.getElementById("enviarBtn");
+const statusEl = document.getElementById("status");
+const box = document.getElementById("mainBox");
+
+async function atualizarContador(){
+    try{
+        const resp = await fetch(WEBAPP_URL);
+        const data = await resp.json();
+        const total = data.total;
+
+        if(total >= MAX_PARTICIPANTES){
+            enviarBtn.disabled = true;
+            statusEl.textContent = "Grupo lotado! Não é possível entrar no grupo.";
+            alert("O grupo atingiu o limite de participantes!");
+        } else {
+            statusEl.textContent = `Participantes atuais: ${total}/${MAX_PARTICIPANTES}`;
+            checkForm();
+        }
+    } catch(err){ console.error(err); }
+}
+
+function checkForm() {
+    enviarBtn.disabled = !aceiteCheckbox.checked || !nomeInput.value.trim();
+}
+
+aceiteCheckbox.addEventListener("change", checkForm);
+nomeInput.addEventListener("input", checkForm);
+
+document.getElementById("reservaForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    try{
+        const resp = await fetch(WEBAPP_URL, {
+            method:"POST",
+            body: new URLSearchParams({ nome: nomeInput.value })
+        });
+        const data = await resp.json();
+        if(data.total >= MAX_PARTICIPANTES){
+            enviarBtn.disabled = true;
+            statusEl.textContent = "Grupo lotado! Não é possível entrar no grupo.";
+            alert("O grupo atingiu o limite de participantes!");
+            return;
+        }
+        window.open(JOIN_LINK, "_blank");
+        atualizarContador();
+    } catch(err){ console.error(err); }
+});
+
+atualizarContador();
+setInterval(atualizarContador,5000);
+</script>
+</body>
+</html>
+
