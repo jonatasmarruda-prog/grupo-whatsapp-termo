@@ -3,91 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Termo de Ciência e Responsabilidade – Trilheiros de Rondonópolis</title>
+<title>Trilha Morro da Mesa – 23 de Novembro</title>
 <style>
-body { font-family: Arial; background:#0b0b0b; color:#fff; padding:20px; text-align:center; }
-h1 { color:#fff; }
-.box { max-width:700px; margin:auto; background:#151515; padding:20px; border-radius:10px; text-align:left; }
-input { padding:10px; margin:5px 0; width:100%; border-radius:6px; border:none; }
-button { padding:12px 20px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-top:10px; background:#25D366; color:#fff; }
-button:disabled { background:#444; color:#999; cursor:not-allowed; }
-.status { margin-top:10px; font-weight:bold; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #008037;
+    margin-bottom: 10px;
+  }
+  .sub {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+  }
+  input, textarea, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  button {
+    background-color: #008037;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+  }
+  button:hover {
+    background-color: #006b2c;
+  }
+  .contador {
+    text-align: center;
+    background: #e8f5e9;
+    border: 1px solid #b2dfdb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  .fechado {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+  }
 </style>
 </head>
 <body>
+  <div class="container">
+    <h1>TRILHA MORRO DA MESA</h1>
+    <div class="sub">23 de Novembro</div>
 
-<div class="box">
-<h1>Termo de Ciência e Responsabilidade – Trilha Morro da Mesa</h1>
-<p><strong>Data do passeio:</strong> 23 de novembro</p>
+    <p><strong>Termo de Ciência e Responsabilidade – Trilheiros de Rondonópolis</strong></p>
+    <p>Leia com atenção as informações abaixo. Ao preencher este formulário, você declara que está ciente, concorda e assume total responsabilidade pela sua participação.</p>
+    <ul>
+      <li>O percurso tem nível médio a avançado, com trechos íngremes e escorregadios.</li>
+      <li>É obrigatório o uso de calçados adequados, água, protetor solar e roupas confortáveis.</li>
+      <li>É proibido o uso de caixas de som para preservar o ambiente.</li>
+      <li>O participante deve respeitar a natureza, não deixar lixo e seguir as orientações do guia.</li>
+      <li>A organização não se responsabiliza por acidentes causados por imprudência ou desrespeito às regras.</li>
+      <li>Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.</li>
+      <li>É indispensável estar em boas condições de saúde para participar da trilha.</li>
+      <li>Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou histórico de desmaios/síncopes não devem participar.</li>
+      <li>Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos.</li>
+      <li>Crianças menores de 14 anos não são permitidas.</li>
+    </ul>
+    <p><strong>Declaração:</strong> Eu, abaixo assinado, declaro que participarei da trilha por minha livre e espontânea vontade, estou ciente dos riscos envolvidos e isento os organizadores de qualquer responsabilidade por acidentes decorrentes da atividade, exceto em casos de comprovada negligência. Declaro também que estou em condições físicas adequadas para a prática da atividade.</p>
 
-<form id="termoForm">
-<label>Nome completo:</label>
-<input type="text" id="nome" placeholder="Digite seu nome completo" required>
+    <form id="termoForm">
+      <label>Nome completo:</label>
+      <input type="text" id="nome" name="nome" required>
 
-<label>WhatsApp:</label>
-<input type="text" id="whatsapp" placeholder="Digite seu WhatsApp (ex: 5599999999999)" required>
+      <label>WhatsApp:</label>
+      <input type="text" id="whatsapp" name="whatsapp" required placeholder="(DDD) 9xxxx-xxxx">
 
-<div>
-<input type="checkbox" id="aceite"> Eu declaro que participarei da trilha/passeio por minha livre vontade, estou ciente dos riscos e isento os organizadores de qualquer responsabilidade.
-</div><br>
+      <label>
+        <input type="checkbox" id="aceite" required>
+        Li e aceito o termo de responsabilidade acima
+      </label>
 
-<button type="submit" id="entrarBtn">Enviar e Entrar no Grupo</button>
-</form>
+      <button type="submit">Confirmar e Entrar no Grupo</button>
+    </form>
 
-<p class="status" id="status">Verificando vagas disponíveis...</p>
-</div>
+    <div class="contador" id="contador">Carregando vagas...</div>
+    <div class="fechado" id="fechado" style="display:none;">Grupo fechado. Vagas esgotadas!</div>
+  </div>
 
-<script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx2eQenBBxT1vR3mD65XOv_4Y0GUIjVt3pLt8ISJl43dGTFC57Ljl6T4XzOYXIk__Gx/exec";
-const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
-const MAX_PARTICIPANTES = 75;
-const statusEl = document.getElementById("status");
-const entrarBtn = document.getElementById("entrarBtn");
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx2eQenBBxT1vR3mD65XOv_4Y0GUIjVt3pLt8ISJl43dGTFC57Ljl6T4XzOYXIk__Gx/exec';
+    const form = document.getElementById('termoForm');
+    const contadorEl = document.getElementById('contador');
+    const fechadoEl = document.getElementById('fechado');
+    const limite = 75;
 
-async function verificarVagas() {
-    const resp = await fetch(`${SCRIPT_URL}?action=getTotal`);
-    const total = await resp.text();
-    const restantes = MAX_PARTICIPANTES - parseInt(total);
-    if(restantes <= 0){
-        statusEl.textContent = "Grupo fechado - limite atingido.";
-        entrarBtn.disabled = true;
-    } else {
-        statusEl.textContent = `${restantes} vagas restantes.`;
-        entrarBtn.disabled = false;
+    async function atualizarContador() {
+      try {
+        const res = await fetch(scriptURL + '?contagem=true');
+        const data = await res.json();
+        const total = data.total || 0;
+        const restantes = limite - total;
+        contadorEl.textContent = `Vagas disponíveis: ${restantes > 0 ? restantes : 0}`;
+        if (total >= limite) {
+          form.style.display = 'none';
+          fechadoEl.style.display = 'block';
+        }
+      } catch (e) {
+        contadorEl.textContent = 'Erro ao carregar vagas.';
+      }
     }
-}
 
-document.getElementById("termoForm").addEventListener("submit", async e=>{
-    e.preventDefault();
-    const nome = document.getElementById("nome").value.trim();
-    const whatsapp = document.getElementById("whatsapp").value.trim();
-    const aceite = document.getElementById("aceite").checked;
-    if(!nome || !whatsapp || !aceite){ alert("Preencha todos os campos e aceite o termo."); return; }
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(() => {
+          window.location.href = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
+        })
+        .catch(() => alert('Erro ao enviar. Tente novamente.'));
+    });
 
-    const resp = await fetch(`${SCRIPT_URL}?action=registrar&nome=${encodeURIComponent(nome)}&whatsapp=${encodeURIComponent(whatsapp)}`);
-    const text = await resp.text();
-    if(text === "FECHADO"){
-        alert("Limite de participantes atingido. Grupo fechado.");
-        statusEl.textContent = "Grupo fechado - limite atingido.";
-        entrarBtn.disabled = true;
-        return;
-    }
-
-    // Mensagem automática para WhatsApp
-    const msg = encodeURIComponent(`Olá, meu nome é ${nome}. Aceitei o termo de responsabilidade para a trilha Morro da Mesa em 23/11. Quero participar da trilha.`);
-    window.open(`https://wa.me/${whatsapp}?text=${msg}`, "_blank");
-
-    // Limpar formulário
-    document.getElementById("nome").value = "";
-    document.getElementById("whatsapp").value = "";
-    document.getElementById("aceite").checked = false;
-
-    verificarVagas();
-});
-
-verificarVagas();
-</script>
-
+    atualizarContador();
+    setInterval(atualizarContador, 10000);
+  </script>
 </body>
 </html>
-
