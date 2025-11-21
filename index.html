@@ -1,218 +1,177 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Morro da Mesa 23 de Novembro</title>
+
+<title>TRILHA MORRO DA MESA</title>
 
 <style>
 body {
+    background: #0a0a0a;
+    color: #ffffff;
     font-family: Arial, sans-serif;
-    background: #0d0d0d;
-    color: #ffffff;
     margin: 0;
-    padding: 1.5rem;
-    line-height: 1.7;
-    font-size: 1.15rem;
+    padding: 0;
 }
 
+/* Container */
 .box {
-    background: #1a1a1a;
-    padding: 2rem;
-    border-radius: 14px;
-    max-width: 600px;
-    margin: 1.5rem auto;
-    border: 1px solid #333;
+    max-width: 650px;
+    margin: 20px auto;
+    background: #111111;
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid #0ff;
+    box-shadow: 0 0 18px #0ff;
 }
 
+/* Título */
 h1 {
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 0.4rem;
-    color: #4CAF50;
+    text-align: center;
+    font-size: 32px;
+    color: #0ff;
+    letter-spacing: 2px; 
+    margin-bottom: 10px;
 }
 
+/* Subtítulo */
 h2 {
-    font-size: 1.3rem;
-    color: #cccccc;
-    margin-bottom: 1.8rem;
+    text-align: center;
+    font-size: 22px;
+    color: #ffffff;
+    margin-bottom: 25px;
 }
 
-textarea {
+/* Inputs */
+input[type="text"], input[type="checkbox"] {
     width: 100%;
-    height: 15rem;
-    padding: 1rem;
-    background: #262626;
-    color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    resize: none;
-    font-size: 1.05rem;
-    margin-bottom: 1.5rem;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #0ff;
+    background: #1a1a1a;
+    color: white;
 }
 
 label {
-    font-size: 1.1rem;
+    display: block;
+    margin-top: 20px;
+    font-size: 17px;
 }
 
-input[type="text"] {
-    width: 100%;
-    padding: 1.2rem;
-    font-size: 1.1rem;
-    margin-top: 0.4rem;
-    background: #262626;
-    color: #fff;
-    border-radius: 10px;
-    border: 1px solid #444;
-}
-
-#vagasInfo {
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: bold;
-    padding: 1rem;
-    border: 2px solid #4CAF50;
-    border-radius: 10px;
-    background: #262626;
-    margin-bottom: 1.5rem;
-}
-
-#alertaLotado {
-    background: #d32f2f;
-    padding: 1.2rem;
-    font-size: 1.3rem;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    display: none;
-}
-
-#mensagemAceite {
-    color: #4CAF50;
-    font-size: 1rem;
-    margin-top: 0.5rem;
-    display: none;
-}
-
+/* Botão */
 button {
     width: 100%;
-    padding: 1.3rem;
-    background: #25D366;
+    padding: 14px;
+    background: #00ffff;
+    color: #000000;
     border: none;
+    font-size: 18px;
     border-radius: 10px;
-    font-size: 1.25rem;
-    font-weight: bold;
     cursor: pointer;
-    color: #1a1a1a;
-    margin-top: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 0 15px #00ffff;
+    margin-top: 20px;
 }
 
-button:disabled {
-    background: #555;
-    color: #999;
-    cursor: not-allowed;
+button:hover {
+    background: #0ff;
+    transform: scale(1.03);
+}
+
+/* Aviso de grupo lotado */
+#alertaLotado {
+    display: none;
+    background: #ff0000;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Termos */
+.termos {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1px solid #0ff;
+}
+
+.termos p {
+    margin: 10px 0;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="box">
-    <h1>Morro da Mesa 23 de Novembro</h1>
-    <h2>Trilheiros de Rondonópolis</h2>
+    
+    <div id="alertaLotado">⚠️ Grupo lotado. As 75 vagas foram preenchidas.</div>
 
-    <div id="vagasInfo">
-        Vagas disponíveis: <span id="vagasRestantes">75</span> / 75
-    </div>
+    <h1>TRILHA MORRO DA MESA</h1>
+    <h2>23 DE NOVEMBRO</h2>
 
-    <div id="alertaLotado">Grupo lotado. As 75 vagas foram preenchidas.</div>
-
-    <textarea readonly>
-O percurso tem nível médio a avançado, inclui trechos íngremes e com risco de escorregar.
-É obrigatório usar calçado adequado, levar água, protetor solar e roupas confortáveis.
-Caixa de som não é permitida, preserve a natureza.
-Cada participante deve respeitar o ambiente e manter o local limpo.
-A organização não assume responsabilidade por acidentes causados por imprudência.
-Em caso de clima desfavorável o passeio pode ser cancelado ou adiado.
-É necessário estar em boas condições de saúde para participar.
-Pessoas com problemas cardíacos, respiratórios ou histórico de desmaio não devem realizar esta atividade.
-Participantes sedentários devem avaliar com atenção os riscos.
-Crianças menores de 14 anos não podem participar.
-    </textarea>
-
-    <label for="nome">Nome completo</label>
+    <label>Seu nome</label>
     <input type="text" id="nome" placeholder="Digite seu nome">
 
-    <label>
-        <input type="checkbox" id="aceite"> Confirmo que li e aceito o termo de responsabilidade
-    </label>
 
-    <div id="mensagemAceite">Agora clique no botão para entrar no grupo do WhatsApp</div>
+    <div class="termos">
+        <label><input type="checkbox" id="termo"> Aceito os termos</label>
 
-    <button id="entrarBtn" disabled>Clica aqui para entrar no grupo</button>
+        <p>- Proibido caixa de som  
+        <p>- Respeitar o ritmo do grupo  
+        <p>- Obrigatório seguir as orientações do condutor  
+        <p>- Cada participante é responsável por seus pertences  
+        <p>- Risco natural da trilha reconhecido  
+    </div>
+
+    <button onclick="entrar()">Clica aqui para entrar no grupo</button>
 
 </div>
 
 <script>
-const MAX_VAGAS = 75;
-let vagasDisponiveis = MAX_VAGAS;
-const LINK_WHATSAPP = 'https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7';
+// Limite de vagas
+const LIMITE_VAGAS = 75;
 
-const nomeInput = document.getElementById('nome');
-const aceiteCheckbox = document.getElementById('aceite');
-const entrarBtn = document.getElementById('entrarBtn');
-const vagasRestantesSpan = document.getElementById('vagasRestantes');
-const alertaLotado = document.getElementById('alertaLotado');
-const vagasInfoDiv = document.getElementById('vagasInfo');
-const mensagemAceite = document.getElementById('mensagemAceite');
+// Link do grupo
+const LINK_WHATSAPP = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
 
-function checkInputs() {
-    const nomeValido = nomeInput.value.trim() !== '';
-    const aceiteValido = aceiteCheckbox.checked;
+// Simulação de contagem (troque pelo contador real do Apps Script se quiser)
+let totalInscritos = 0;
 
-    if (aceiteValido) {
-        mensagemAceite.style.display = 'block';
-    } else {
-        mensagemAceite.style.display = 'none';
-    }
-
-    entrarBtn.disabled = !(nomeValido && aceiteValido && vagasDisponiveis > 0);
-}
-
-function atualizarContador() {
-    vagasRestantesSpan.textContent = vagasDisponiveis;
-
-    if (vagasDisponiveis <= 0) {
-        entrarBtn.style.display = 'none';
-        alertaLotado.style.display = 'block';
-        vagasInfoDiv.style.display = 'none';
+// Bloqueia quando atingir 75
+function verificarVagas() {
+    if (totalInscritos >= LIMITE_VAGAS) {
+        document.getElementById("alertaLotado").style.display = "block";
+        document.querySelector("button").disabled = true;
+        document.querySelector("button").style.background = "#555";
     }
 }
+verificarVagas();
 
-function handleRegistro(event) {
-    event.preventDefault();
+// Função do botão
+function entrar() {
+    const nome = document.getElementById("nome").value;
+    const termo = document.getElementById("termo").checked;
 
-    if (vagasDisponiveis <= 0) {
+    if (nome.trim() === "") {
+        alert("Preencha seu nome");
         return;
     }
 
-    vagasDisponiveis--;
-    atualizarContador();
+    if (!termo) {
+        alert("Você precisa aceitar os termos");
+        return;
+    }
+
+    alert("Entrada confirmada. Clique em OK para acessar o grupo");
 
     window.location.href = LINK_WHATSAPP;
-
-    nomeInput.value = '';
-    aceiteCheckbox.checked = false;
-    checkInputs();
 }
-
-nomeInput.addEventListener('input', checkInputs);
-aceiteCheckbox.addEventListener('change', checkInputs);
-entrarBtn.addEventListener('click', handleRegistro);
-
-atualizarContador();
-checkInputs();
 </script>
 
 </body>
