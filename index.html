@@ -9,7 +9,7 @@
 :root{
     --bg:#05060a;
     --panel:#0f1620;
-    --muted:#bfc9d9;
+    --text:#e8f0ff;
     --blue:#4da8ff;
     --pink:#ff4dff;
     --green:#4dff88;
@@ -20,9 +20,8 @@ html,body{
     margin:0;
     font-family:'Inter','Roboto',Arial,sans-serif;
     background:linear-gradient(180deg,#030406 0%,var(--bg) 100%);
-    color:#e8f0ff;
+    color:var(--text);
     -webkit-font-smoothing:antialiased;
-    font-size:16px;
 }
 
 .wrap{
@@ -43,31 +42,47 @@ html,body{
 /* Logo */
 .logo{
     width:140px;
-    margin:0 auto 12px auto;
+    margin:0 auto 16px auto;
     display:block;
     filter: drop-shadow(0 0 16px #4da8ff);
 }
 
-/* Título com neon */
+/* Neon pulsante */
+@keyframes neonPulse {
+  0%,100%{ text-shadow: 0 0 4px var(--blue),0 0 8px var(--blue),0 0 16px var(--blue);}
+  50%{ text-shadow: 0 0 10px var(--blue),0 0 20px var(--blue),0 0 30px var(--blue);}
+}
+
+/* Título Neon pulsante */
 h1{
     font-size:2.4rem;
     margin:6px 0 4px 0;
-    color:#4da8ff;
+    color:var(--blue);
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:2px;
-    text-shadow: 0 0 6px #4da8ff,0 0 12px #4da8ff,0 0 24px #4da8ff;
+    animation:neonPulse 1.5s infinite alternate;
+}
+
+@keyframes neonPulseYellow {
+  0%,100%{ text-shadow:0 0 3px var(--yellow),0 0 6px var(--yellow),0 0 12px var(--yellow);}
+  50%{ text-shadow:0 0 8px var(--yellow),0 0 16px var(--yellow),0 0 24px var(--yellow);}
 }
 
 h2{
     font-size:1rem;
-    color:#ffdd4d;
+    color:var(--yellow);
     margin:0 0 18px 0;
     font-weight:600;
-    text-shadow:0 0 4px #ffdd4d,0 0 8px #ffdd4d;
+    animation:neonPulseYellow 1.5s infinite alternate;
 }
 
-/* Contador */
+/* Contador de vagas com neon pulsante */
+@keyframes neonVagas{
+  0%,100%{ box-shadow:0 6px 18px rgba(77,168,255,0.08);}
+  50%{ box-shadow:0 6px 18px rgba(77,168,255,0.4);}
+}
+
 .vagasBox{
     display:flex;
     justify-content:space-between;
@@ -77,10 +92,10 @@ h2{
     border-radius:12px;
     background:linear-gradient(180deg, rgba(77,168,255,0.05), transparent);
     border:1px solid rgba(77,168,255,0.1);
-    color:#4da8ff;
+    color:var(--blue);
     font-weight:700;
     margin-bottom:14px;
-    box-shadow:0 6px 18px rgba(77,168,255,0.08);
+    animation:neonVagas 1.5s infinite alternate;
 }
 
 .vagasBox span.count{
@@ -129,19 +144,24 @@ label.checkbox{
     gap:12px;
     align-items:center;
     cursor:pointer;
-    color:#ff4dff;
+    color:var(--pink);
     font-weight:600;
-    text-shadow:0 0 4px #ff4dff,0 0 8px #ff4dff;
+    text-shadow:0 0 4px var(--pink),0 0 8px var(--pink);
 }
 
 input[type="checkbox"]{
     width:20px;
     height:20px;
-    accent-color: #4da8ff;
+    accent-color: var(--blue);
     transform:scale(1.05);
 }
 
-/* Botão */
+/* Botão pulsante */
+@keyframes neonBtn{
+  0%,100%{ box-shadow:0 8px 20px rgba(77,168,255,0.25),0 0 20px rgba(255,77,255,0.14);}
+  50%{ box-shadow:0 8px 20px rgba(77,168,255,0.7),0 0 28px rgba(255,77,255,0.4);}
+}
+
 .btn{
     display:block;
     width:100%;
@@ -152,15 +172,15 @@ input[type="checkbox"]{
     font-size:1.1rem;
     cursor:pointer;
     border:none;
-    transition: transform .12s ease, box-shadow .15s ease, opacity .12s ease;
+    transition: transform .12s ease, opacity .12s ease;
 }
 
 .btn-entrar{
-    background:linear-gradient(45deg,#4da8ff,#ff4dff,#ffdd4d);
+    background:linear-gradient(45deg,var(--blue),var(--pink),var(--yellow));
     color:#05060a;
-    box-shadow:0 10px 30px rgba(77,168,255,0.25),0 0 28px rgba(255,77,255,0.14);
     display:none;
     text-shadow:0 0 6px #fff;
+    animation:neonBtn 1.5s infinite alternate;
 }
 
 .btn-entrar:active{
@@ -208,20 +228,16 @@ input[type="checkbox"]{
   <div id="lotado" class="lotado">GRUPO LOTADO</div>
 
   <div class="termo">
-      <p>- O percurso tem nível médio a avançado. Há trechos íngremes e com risco de escorregar.</p>
-      <p>- É obrigatório usar calçado adequado. Leve água, protetor solar e roupas confortáveis.</p>
-      <p>- Caixa de som não é permitida. Preserve a natureza e o ambiente.</p>
-      <p>- Cada participante deve manter o local limpo e seguir orientações do guia.</p>
-      <p>- A organização não assume responsabilidade por acidentes por imprudência.</p>
-      <p>- Em caso de clima desfavorável o passeio poderá ser cancelado ou adiado.</p>
-      <p>- É necessário estar em boas condições de saúde para participar.</p>
-      <p>- Pessoas com problemas cardíacos, respiratórios ou histórico de desmaio não devem fazer esta atividade.</p>
-      <p>- Participantes sedentários devem avaliar os riscos antes de confirmar.</p>
-      <p>- Crianças menores de 14 anos não podem participar.</p>
-      <p>- Não é permitido o uso de caixas de som ou amplificadores, preserve o ambiente.</p>
-      <p>- Leve lanterna e saco de lixo para descarte correto.</p>
-      <p>- Ponto de encontro: entrada da rodovia do peixe.</p>
-      <p>- É proibido avançar até o final do mirante, risco de queda.</p>
+      <p>- O percurso tem nível médio a avançado, com trechos íngremes e escorregadios.</p>
+      <p>- É obrigatório o uso de calçados adequados, água, protetor solar e roupas confortáveis.</p>
+      <p>- É proibido o uso de caixas de som para preservar o ambiente.</p>
+      <p>- O participante deve respeitar a natureza, não deixar lixo e seguir as orientações do guia.</p>
+      <p>- A organização não se responsabiliza por acidentes causados por imprudência ou desrespeito às regras.</p>
+      <p>- Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.</p>
+      <p>- É indispensável estar em boas condições de saúde para participar da trilha.</p>
+      <p>- Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou com histórico de desmaios/síncopes não são orientadas a realizar essa atividade.</p>
+      <p>- Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.</p>
+      <p>- Crianças menores de 14 anos, não serão permitidas.</p>
   </div>
 
   <input type="text" id="nome" placeholder="Digite seu nome completo">
