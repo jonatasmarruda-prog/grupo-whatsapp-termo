@@ -1,114 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trilha Morro da Mesa - 23 de Novembro</title>
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #000;
-    color: #fff;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-}
-.box {
-    background: #111;
-    padding: 30px;
-    border-radius: 15px;
-    max-width: 600px;
-    margin: auto;
-    box-shadow: 0 0 20px rgba(0,255,0,0.5);
-}
-h1 {
-    font-size: 2.4em;
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px #28a745;
-}
-h2 {
-    font-size: 1.4em;
-    margin-bottom: 20px;
-    color: #ccc;
-}
-input, textarea {
-    width: 100%;
-    padding: 16px;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 10px;
-    margin-top: 12px;
-    box-sizing: border-box;
-}
-textarea {
-    height: 280px;
-    background: #222;
-    color: #fff;
-    resize: none;
-}
-label {
-    display: block;
-    margin-top: 20px;
-    font-size: 1.2em;
-}
-button {
-    width: 100%;
-    padding: 20px;
-    border: none;
-    border-radius: 10px;
-    margin-top: 20px;
-    background: #28a745;
-    color: #fff;
-    font-size: 1.3em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-button:disabled {
-    background: #444;
-    color: #999;
-    cursor: not-allowed;
-}
-button:hover:not(:disabled) {
-    transform: scale(1.05);
-    background: #1e7e34;
-}
-#alertaLotado {
-    background: #c40000;
-    padding: 20px;
-    border-radius: 12px;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.5em;
-    display: none;
-    margin-bottom: 20px;
-    box-shadow: 0 0 15px rgba(255,0,0,0.7);
-}
-#mensagemErro {
-    color: #ff4444;
-    font-weight: bold;
-    margin-top: 10px;
-    font-size: 1.2em;
-}
-@media (max-width: 500px) {
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.2em; }
-    input, textarea, button { font-size: 1.2em; padding: 14px; }
-    label { font-size: 1.1em; }
-    button {
-        position: sticky;
-        bottom: 10px;
-        z-index: 10;
-    }
-}
-</style>
-</head>
-<body>
+<!-- ... [cabeçalho e estilos iguais ao anterior] ... -->
 
 <div class="box">
 <h1>Trilha Morro da Mesa</h1>
@@ -141,13 +31,14 @@ button:hover:not(:disabled) {
     Entrar no grupo do WhatsApp
 </button>
 <div id="mensagemErro"></div>
+<p style="margin-top:10px; font-size:1.1em; color:#ccc;">Clique no botão para acessar o grupo do WhatsApp</p>
 
 </div>
 
 <script>
 const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
 const MAX_PARTICIPANTES = 75;
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz9m_YrXZ3pCNTsqnBX9XuNuTIINjQ0ErPpmkUyU9FkkYKv9bI5fWP2w93Ui9VjA1hs8Q/exec";
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzK_Y9HAHMFqZBQAhEWjmJH5pdIYD2-Z9n4irlu7O0_/dev";
 
 const nomeInput = document.getElementById("nome");
 const aceite = document.getElementById("aceite");
@@ -201,7 +92,6 @@ botao.addEventListener("click", async () => {
             return;
         }
 
-        alert("Cadastro realizado com sucesso! Você será direcionado para o grupo.");
         window.open(JOIN_LINK, "_blank");
 
     } catch (e) {
