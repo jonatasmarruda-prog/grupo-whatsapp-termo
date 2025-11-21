@@ -1,70 +1,135 @@
 <style>
+/* Estilos profissionais com fundo preto/escuro e otimização mobile (baseados no seu pedido anterior) */
 body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background: #f7f7f7;
+    font-family: 'Roboto', Arial, sans-serif;
+    padding: 1.5rem;
+    background: #1a1a1a; /* Fundo Preto/Muito Escuro */
+    color: #f0f0f0; /* Letras Brancas/Claras */
 }
 
 .box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    background: #282828; /* Fundo do box um pouco mais claro que o body */
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.4);
     max-width: 500px;
     margin: 0 auto;
 }
 
+h1 {
+    font-size: 2.2rem; /* Título principal bem grande */
+    margin-bottom: 0.25rem;
+    color: #4CAF50; /* Cor de destaque (verde) */
+}
+
+h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+/* Informação do contador de vagas */
+#vagasInfo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #4CAF50; /* Cor verde para destaque */
+    padding: 0.5rem;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+}
+
+/* Alerta de lotado */
+#alertaLotado {
+    font-size: 1.1rem;
+    padding: 1rem;
+    background-color: #f44336; /* Fundo vermelho para alerta */
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
 textarea {
     width: 100%;
-    height: 200px;
-    margin-bottom: 15px;
-    padding: 10px;
+    height: 15rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
     resize: none;
-    font-size: 14px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 5px;
 }
 
 input[type="text"] {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0 15px 0;
-    font-size: 16px;
+    padding: 1rem;
+    margin: 0.3rem 0 1.5rem 0;
+    font-size: 1rem;
     box-sizing: border-box;
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 5px;
 }
 
 button {
     width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    background-color: #25D366;
-    color: white;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #25D366; /* Verde WhatsApp */
+    color: #1a1a1a;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+    background-color: #1FAF54;
 }
 
 button:disabled {
-    background-color: #999;
+    background-color: #5a5a5a;
+    color: #a0a0a0;
     cursor: not-allowed;
 }
 
 label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.2);
 }
 
 #mensagemErro {
-    margin-top: 10px;
-    color: red;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #ff8a80;
 }
 </style>
 
 <div class="box">
-  <h1>Trilha Morro da Mesa</h1>
-  <h2>23 de Novembro - Trilheiros de Rondonópolis</h2>
+    <h1>Trilha Morro da Mesa</h1>
+    <h2>23 de Novembro - Trilheiros de Rondonópolis</h2>
 
-  <div id="alertaLotado" style="display:none;">⚠️ Grupo lotado! As 75 vagas foram preenchidas.</div>
+    <div id="vagasInfo">
+        Vagas disponíveis: <span id="vagasRestantes">75</span> / 75
+    </div>
+    
+    <div id="alertaLotado" style="display:none;">⚠️ Grupo lotado! As 75 vagas foram preenchidas.</div>
 
-  <textarea readonly>
+    <textarea readonly>
 - O percurso tem nível médio a avançado, com trechos íngremes e escorregadios.
 - É obrigatório o uso de calçados adequados, água, protetor solar e roupas confortáveis.
 - É proibido o uso de caixas de som para preservar o ambiente.
@@ -75,18 +140,92 @@ label {
 - Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou com histórico de desmaios/síncopes não são orientadas a realizar esta atividade.
 - Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.
 - Crianças menores de 14 anos não serão permitidas.
-  </textarea>
+    </textarea>
 
-  <label for="nome">Nome completo</label>
-  <input type="text" id="nome" placeholder="Digite seu nome completo">
+    <label for="nome">Nome completo</label>
+    <input type="text" id="nome" placeholder="Digite seu nome completo">
 
-  <label>
-    <input type="checkbox" id="aceite"> Confirmo que li e aceito o termo de responsabilidade
-  </label>
+    <label>
+        <input type="checkbox" id="aceite"> Confirmo que li e aceito o termo de responsabilidade
+    </label>
 
-  <button id="entrarBtn" disabled>
-    Entrar no grupo do WhatsApp
-  </button>
+    <button id="entrarBtn" disabled>
+        Entrar no grupo do WhatsApp
+    </button>
 
-  <div id="mensagemErro"></div>
+    <div id="mensagemErro"></div>
 </div>
+
+<script>
+    // Capacidade máxima do grupo
+    const MAX_VAGAS = 75;
+    // Variável que simula as vagas restantes (inicia em 75)
+    let vagasDisponiveis = MAX_VAGAS; 
+
+    // Referências aos elementos do DOM
+    const nomeInput = document.getElementById('nome');
+    const aceiteCheckbox = document.getElementById('aceite');
+    const entrarBtn = document.getElementById('entrarBtn');
+    const mensagemErro = document.getElementById('mensagemErro');
+    const alertaLotado = document.getElementById('alertaLotado');
+    const vagasRestantesSpan = document.getElementById('vagasRestantes');
+    const vagasInfoDiv = document.getElementById('vagasInfo');
+
+    // Função para verificar os campos e habilitar/desabilitar o botão
+    function checkInputs() {
+        const nomeValido = nomeInput.value.trim() !== '';
+        const aceiteValido = aceiteCheckbox.checked;
+
+        // O botão só é habilitado se os campos estiverem preenchidos E houver vagas
+        if (nomeValido && aceiteValido && vagasDisponiveis > 0) {
+            entrarBtn.disabled = false;
+        } else {
+            entrarBtn.disabled = true;
+        }
+    }
+
+    // Função para atualizar o número de vagas na tela e verificar o estado de lotado
+    function atualizarContador() {
+        vagasRestantesSpan.textContent = vagasDisponiveis;
+        
+        // Lógica de Bloqueio Imediato
+        if (vagasDisponiveis <= 0) {
+            entrarBtn.style.display = 'none'; // Esconde o botão
+            alertaLotado.style.display = 'block'; // Mostra a mensagem de lotado
+            vagasInfoDiv.style.display = 'none'; // Opcional: esconde o contador
+            mensagemErro.textContent = ''; // Limpa qualquer mensagem de sucesso anterior
+        }
+    }
+
+    // Função executada ao clicar no botão
+    function handleRegistro(event) {
+        event.preventDefault(); // Impede qualquer ação padrão do botão (como submit)
+
+        if (vagasDisponiveis <= 0) {
+            return; // Garante que não haverá cliques após lotação
+        }
+
+        // 1. Decrementa o contador
+        vagasDisponiveis--;
+        
+        // 2. Atualiza a tela imediatamente
+        atualizarContador();
+
+        // 3. Exibe uma mensagem de sucesso simulada (em um caso real, seria um redirecionamento)
+        mensagemErro.innerHTML = '<span style="color:#25D366; font-weight: bold;">✅ Vaga reservada! Você seria redirecionado para o WhatsApp agora.</span>';
+        
+        // 4. Limpa os campos e desabilita o botão para "forçar" um novo preenchimento
+        nomeInput.value = '';
+        aceiteCheckbox.checked = false;
+        checkInputs();
+    }
+    
+    // Configuração dos Event Listeners para acionar as funções
+    nomeInput.addEventListener('input', checkInputs);
+    aceiteCheckbox.addEventListener('change', checkInputs);
+    entrarBtn.addEventListener('click', handleRegistro);
+    
+    // Inicialização ao carregar a página
+    atualizarContador();
+    checkInputs();
+</script>
