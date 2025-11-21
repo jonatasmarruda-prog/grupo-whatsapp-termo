@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trilha Morro da Mesa 23 de Novembro - Trilheiros de Rondonópolis</title>
+<title>Trilha Morro da Mesa - Trilheiros de Rondonópolis</title>
 
 <style>
 body {
@@ -92,19 +92,13 @@ button:hover:not(:disabled) {
 .verde { color: #28a745; }
 .amarelo { color: #ffc107; }
 .vermelho { color: #c40000; }
-@media (max-width: 500px) {
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.2em; }
-    input, textarea, button { font-size: 1.2em; padding: 14px; }
-    label { font-size: 1.1em; }
-}
 </style>
 </head>
 <body>
 
 <div class="box">
-<h1>Trilha Morro da Mesa 23 de Novembro</h1>
-<h2>Trilheiros de Rondonópolis</h2>
+<h1>Trilha Morro da Mesa</h1>
+<h2>23 de Novembro - Trilheiros de Rondonópolis</h2>
 
 <div id="alertaLotado">Grupo lotado. Inscrições encerradas.</div>
 <div id="vagasRestantes"></div>
@@ -121,21 +115,25 @@ Participantes sedentários ou sem preparo físico precisam avaliar os riscos ant
 Crianças menores de quatorze anos não poderão participar.
 </textarea>
 
+<label for="nome">Nome completo</label>
 <input type="text" id="nome" placeholder="Digite seu nome completo">
+
+<label for="telefone">Telefone</label>
 <input type="text" id="telefone" placeholder="Digite seu número com DDD">
 
 <label>
 <input type="checkbox" id="aceite"> Confirmo que li e aceito o termo de responsabilidade
 </label>
 
-<button id="entrarBtn" disabled>Clique aqui para entrar no grupo do WhatsApp</button>
+<button id="entrarBtn" disabled>Entrar no grupo do WhatsApp</button>
+<div id="mensagemErro"></div>
 
 </div>
 
 <script>
 const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
 const MAX_PARTICIPANTES = 75;
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzK_Y9HAHMFqZBQAhEWjmJH5pdIYD2-Z9n4irlu7O0_/exec";
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz9m_YrXZ3pCNTsqnBX9XuNuTIINjQ0ErPpmkUyU9FkkYKv9bI5fWP2w93Ui9VjA1hs8Q/exec";
 
 const nomeInput = document.getElementById("nome");
 const telInput = document.getElementById("telefone");
@@ -143,6 +141,7 @@ const aceite = document.getElementById("aceite");
 const botao = document.getElementById("entrarBtn");
 const alerta = document.getElementById("alertaLotado");
 const vagasRestantes = document.getElementById("vagasRestantes");
+const mensagemErro = document.getElementById("mensagemErro");
 
 function validar() {
     const nomeOk = nomeInput.value.trim().length > 3;
@@ -196,19 +195,19 @@ botao.addEventListener("click", async () => {
         const resultado = await resp.json();
 
         if (resultado.erro === "duplicado") {
-            alert("Este nome ou telefone já está inscrito.");
+            mensagemErro.textContent = "Este nome ou telefone já está inscrito.";
             return;
         }
 
         window.open(JOIN_LINK, "_blank");
 
     } catch (e) {
-        alert("Erro ao enviar dados. Tente novamente.");
+        mensagemErro.textContent = "Erro ao enviar dados. Tente novamente.";
     }
 });
 
 verificarStatus();
-setInterval(verificarStatus, 6000);
+setInterval(verificarStatus, 30000); // checa a cada 30s
 </script>
 
 </body>
