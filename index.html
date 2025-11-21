@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trilha Morro da Mesa 23 de novembro - Trilheiros de Rondonópolis</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trilha Morro da Mesa 23 de novembro, Trilheiros de Rondonópolis</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -13,17 +12,19 @@ body {
     margin: 0;
     padding: 20px;
     text-align: center;
+    font-size: 1.1em;
+    line-height: 1.5;
 }
 h1 {
-    font-size: 2.3em;
-    margin-bottom: 5px;
+    font-size: 2.2em;
     color: #fff;
+    margin-bottom: 5px;
     text-shadow: 0 0 10px #28a745;
 }
 h2 {
-    font-size: 1.4em;
-    margin-bottom: 20px;
+    font-size: 1.3em;
     color: #fff;
+    margin-bottom: 20px;
     text-shadow: 0 0 8px #28a745;
 }
 .box {
@@ -33,19 +34,23 @@ h2 {
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,255,0,0.5);
+    transition: transform 0.3s;
+}
+.box:hover {
+    transform: scale(1.02);
 }
 input[type="text"] {
-    padding: 12px;
+    padding: 14px;
     margin: 10px 0;
     width: 95%;
     border-radius: 8px;
     border: none;
-    font-size: 1em;
+    font-size: 1.1em;
 }
 .termo {
     width: 95%;
     height: 320px;
-    padding: 12px;
+    padding: 14px;
     margin: 15px 0;
     border-radius: 8px;
     border: none;
@@ -53,7 +58,8 @@ input[type="text"] {
     color: #fff;
     resize: none;
     overflow-y: scroll;
-    font-size: 0.95em;
+    font-size: 1.05em;
+    line-height: 1.55;
 }
 button {
     padding: 18px 30px;
@@ -63,10 +69,10 @@ button {
     cursor: pointer;
     background: #28a745;
     color: #fff;
-    font-size: 1.2em;
+    font-size: 1.3em;
     margin-top: 15px;
     width: 95%;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
 }
 button:hover:not(:disabled) {
     background: #1e7e34;
@@ -80,29 +86,63 @@ button:disabled {
 .checkbox-label {
     display: block;
     margin: 15px 0;
-    font-size: 1.1em;
+    font-size: 1.15em;
     cursor: pointer;
 }
 #alertaLotado {
-    background: #b30000;
+    background: #c40000;
     color: white;
-    padding: 12px;
+    padding: 14px;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.2em;
     border-radius: 8px;
     margin-bottom: 15px;
     display: none;
+    box-shadow: 0 0 10px rgba(255,0,0,0.8);
 }
 @media(max-width:600px){
+    body {
+        font-size: 1.3em;
+        padding: 18px;
+    }
+    .box {
+        padding: 30px 20px;
+    }
+    input[type="text"] {
+        font-size: 1.25em;
+        padding: 16px;
+    }
     .termo {
-        height: 250px;
+        height: 300px;
+        font-size: 1.2em;
+        padding: 18px;
+        line-height: 1.6;
     }
     button {
-        font-size: 1em;
-        padding: 14px 20px;
+        font-size: 1.3em;
+        padding: 20px 24px;
+        width: 100%;
+        border-radius: 12px;
     }
     h1 {
-        font-size: 2em;
+        font-size: 2.1em;
+        margin-bottom: 10px;
+    }
+    h2 {
+        font-size: 1.3em;
+        margin-bottom: 22px;
+    }
+}
+    .termo {
+        height: 260px;
+        font-size: 1.1em;
+    }
+    button {
+        font-size: 1.2em;
+        padding: 16px 22px;
+    }
+    h1 {
+        font-size: 1.9em;
     }
     h2 {
         font-size: 1.15em;
@@ -111,116 +151,64 @@ button:disabled {
 </style>
 </head>
 <body>
-
-<div class="box" id="mainBox">
-
-<div id="alertaLotado">Grupo lotado. Inscrição encerrada.</div>
-
+<header>
 <h1>Trilha Morro da Mesa 23 de novembro</h1>
 <h2>Trilheiros de Rondonópolis</h2>
-
-<form id="reservaForm">
-<input type="text" id="nome" placeholder="Digite seu nome completo" required><br>
-
-<textarea class="termo" readonly>
-TERMO DE RESPONSABILIDADE E INSTRUÇÕES
-
-O percurso tem nível médio a difícil com trechos íngremes e escorregadios. É obrigatório o uso de calçados apropriados, roupas confortáveis, protetor solar e água.
-
-É proibido usar caixas de som ou consumir bebidas alcoólicas. Qualquer violação poderá resultar na retirada do participante.
-
-Todos devem preservar o meio ambiente, não deixar lixo e seguir as orientações do guia.
-
-A organização poderá afastar qualquer pessoa que coloque em risco o grupo ou o andamento do passeio.
-
-A organização não se responsabiliza por acidentes causados por imprudência ou falta de preparo físico.
-
-O passeio poderá ser cancelado ou adiado em caso de mau tempo.
-
-É indispensável estar em boas condições de saúde. Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou histórico de desmaios não devem participar.
-
-Participantes sem preparo físico devem avaliar os riscos antes de confirmar presença.
-
-Menores de catorze anos não poderão participar.
-
-Declaro que estou ciente dos riscos e isento os organizadores de qualquer responsabilidade decorrente da atividade.
-</textarea>
-
-<label class="checkbox-label">
-<input type="checkbox" id="aceite"> Li e aceito o termo de responsabilidade
-</label>
-
-<button type="submit" id="enviarBtn" disabled>Entrar no grupo do WhatsApp</button>
-</form>
-
+</header>
+<section>
+<div class="container">
+<h3>Confirmação de participação</h3>
+<p>Preencha seu nome e telefone, leia o termo e confirme a entrada. O grupo será fechado quando atingir o limite de vagas.</p>
+<div id="alertaGrupo" class="alert">Grupo lotado. Nenhuma inscrição adicional será aceita.</div>
+<label for="nome">Nome completo</label>
+<input type="text" id="nome" placeholder="Digite seu nome" />
+<label for="telefone">Telefone WhatsApp</label>
+<input type="text" id="telefone" placeholder="Digite seu número" />
+<label><input type="checkbox" id="termo" /> Concordo com o termo de participação</label>
+<button id="btnConfirmar">Confirmar presença</button>
+<div id="sucesso" class="success">Inscrição confirmada. Clique no botão abaixo para acessar o grupo.</div>
+<button id="btnGrupo" style="display:none">Entrar no grupo</button>
+<h3>Regras básicas</h3>
+<ul>
+<li>Respeite a natureza e mantenha o local limpo</li>
+<li>Leve água, lanterna, protetor solar e saco de lixo</li>
+<li>Evite ir até a borda da janela por risco de queda</li>
+<li>Trilhe sempre acompanhado e siga as orientações do condutor</li>
+</ul>
+<h3>Privacidade</h3>
+<p>Seu nome e telefone serão usados apenas para controle de vagas e organização da trilha.</p>
 </div>
+</section>
 
 <script>
-// CONFIGURAÇÕES
-const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
-const MAX_PARTICIPANTES = 75;
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz9m_YrXZ3pCNTsqnBX9XuNuTIINjQ0ErPpmkUyU9FkkYKv9bI5fWP2w93Ui9VjA1hs8Q/exec";
+const limite = 75;
+let total = 0;
+const btn = document.getElementById("btnConfirmar");
+const grupo = document.getElementById("btnGrupo");
+const sucesso = document.getElementById("sucesso");
+const alerta = document.getElementById("alertaGrupo");
 
-const nomeInput = document.getElementById("nome");
-const aceiteCheckbox = document.getElementById("aceite");
-const enviarBtn = document.getElementById("enviarBtn");
-const alerta = document.getElementById("alertaLotado");
-
-// Verifica se pode habilitar botão
-function checkForm() {
-    enviarBtn.disabled = !aceiteCheckbox.checked || !nomeInput.value.trim();
+function atualizar() {
+if (total >= limite) {
+btn.disabled = true;
+alerta.style.display = "block";
+}
 }
 
-aceiteCheckbox.addEventListener("change", checkForm);
-nomeInput.addEventListener("input", checkForm);
-
-// Checa limite no servidor
-async function verificarLimite() {
-    try {
-        const resp = await fetch(WEBAPP_URL);
-        const data = await resp.json();
-        const total = data.total;
-
-        if (total >= MAX_PARTICIPANTES) {
-            enviarBtn.disabled = true;
-            alerta.style.display = "block";
-            return true;
-        } else {
-            alerta.style.display = "none";
-            checkForm();
-            return false;
-        }
-    } catch (err) {
-        console.error(err);
-        return true;
-    }
+btn.addEventListener("click", function () {
+const n = document.getElementById("nome").value.trim();
+const t = document.getElementById("telefone").value.trim();
+const termo = document.getElementById("termo").checked;
+if (!n || !t || !termo) {
+alert("Preencha nome, telefone e aceite o termo para continuar");
+return;
 }
-
-// Envio
-document.getElementById("reservaForm").addEventListener("submit", async e => {
-    e.preventDefault();
-
-    const lotado = await verificarLimite();
-    if (lotado) {
-        alert("O grupo atingiu o limite de participantes.");
-        return;
-    }
-
-    try {
-        await fetch(WEBAPP_URL, {
-            method: "POST",
-            body: new URLSearchParams({ nome: nomeInput.value })
-        });
-        window.open(JOIN_LINK, "_blank");
-    } catch (err) {
-        console.error(err);
-    }
+total = total + 1;
+atualizar();
+sucesso.style.display = "block";
+grupo.style.display = "block";
+grupo.onclick = function(){ window.open("SEU_LINK_DO_GRUPO_AQUI", "_blank"); };
 });
-
-// Atualização periódica
-verificarLimite();
-setInterval(verificarLimite, 5000);
 </script>
-
 </body>
 </html>
