@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trilha Morro da Mesa - Trilheiros de Rondonópolis</title>
+<title>Trilha Morro da Mesa - 23 de Novembro</title>
 
 <style>
 body {
@@ -64,6 +64,10 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 button:disabled {
     background: #444;
@@ -85,13 +89,30 @@ button:hover:not(:disabled) {
     margin-bottom: 10px;
 }
 #vagasRestantes {
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .verde { color: #28a745; }
 .amarelo { color: #ffc107; }
 .vermelho { color: #c40000; }
+#mensagemErro {
+    color: #ff4444;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+@media (max-width: 500px) {
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.2em; }
+    input, textarea, button { font-size: 1.2em; padding: 14px; }
+    label { font-size: 1.1em; }
+    button {
+        position: sticky;
+        bottom: 10px;
+        z-index: 10;
+    }
+}
 </style>
 </head>
 <body>
@@ -100,19 +121,16 @@ button:hover:not(:disabled) {
 <h1>Trilha Morro da Mesa</h1>
 <h2>23 de Novembro - Trilheiros de Rondonópolis</h2>
 
-<div id="alertaLotado">Grupo lotado. Inscrições encerradas.</div>
-<div id="vagasRestantes"></div>
+<div id="vagasRestantes">Verificando vagas...</div>
+<div id="alertaLotado">⚠️ Grupo lotado! As 75 vagas foram preenchidas.</div>
 
 <textarea readonly>
 O percurso apresenta nível médio a avançado com trechos íngremes e escorregadios exigindo atenção e preparo físico adequado.
 É obrigatório o uso de calçados apropriados, roupas confortáveis, protetor solar e água.
-É proibido utilizar caixas de som para preservar o ambiente natural.
-O participante deve respeitar a natureza, não deixar lixo e seguir toda orientação do guia.
-A organização não assume responsabilidade por acidentes decorrentes de imprudência ou falta de preparo.
-Em condições climáticas adversas o passeio pode ser adiado ou cancelado.
-É fundamental estar em boas condições de saúde. Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou histórico de desmaios não devem participar.
-Participantes sedentários ou sem preparo físico precisam avaliar os riscos antes de confirmar presença.
-Crianças menores de quatorze anos não poderão participar.
+É proibido utilizar calças ou bermudas jeans durante a trilha.
+O participante deve respeitar a natureza, não deixar lixo e seguir todas orientações do guia.
+É obrigatório o uso de máscara de proteção para os cuidados com a disseminação do coronavírus.
+Pessoas com problemas cardíacos, respiratórios ou mobilidade reduzida devem consultar seu médico antes de participar.
 </textarea>
 
 <label for="nome">Nome completo</label>
@@ -125,7 +143,10 @@ Crianças menores de quatorze anos não poderão participar.
 <input type="checkbox" id="aceite"> Confirmo que li e aceito o termo de responsabilidade
 </label>
 
-<button id="entrarBtn" disabled>Entrar no grupo do WhatsApp</button>
+<button id="entrarBtn" disabled>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="24" height="24">
+    Entrar no grupo do WhatsApp
+</button>
 <div id="mensagemErro"></div>
 
 </div>
@@ -160,20 +181,24 @@ async function verificarStatus() {
         const data = await r.json();
 
         const vagas = MAX_PARTICIPANTES - data.total;
+
+        if (data.total >= MAX_PARTICIPANTES) {
+            botao.disabled = true;
+            alerta.style.display = "block";
+            vagasRestantes.textContent = "⚠️ Grupo lotado! As 75 vagas foram preenchidas.";
+            vagasRestantes.className = "vermelho";
+            mensagemErro.textContent = "Infelizmente o grupo já atingiu o limite de participantes. Fique atento aos próximos eventos!";
+            return;
+        }
+
         vagasRestantes.textContent = "Vagas restantes: " + vagas;
+        mensagemErro.textContent = "";
 
         if (vagas > 20) vagasRestantes.className = "verde";
         else if (vagas <= 20 && vagas > 5) vagasRestantes.className = "amarelo";
         else vagasRestantes.className = "vermelho";
 
-        if (data.total >= MAX_PARTICIPANTES) {
-            botao.disabled = true;
-            alerta.style.display = "block";
-            vagasRestantes.textContent = "Vagas esgotadas!";
-            vagasRestantes.className = "vermelho";
-        } else {
-            alerta.style.display = "none";
-        }
+        alerta.style.display = "none";
     } catch (e) {
         console.log("Erro ao verificar limite", e);
     }
