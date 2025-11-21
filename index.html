@@ -1,12 +1,10 @@
-<!-- ... [cabeçalho e estilos iguais ao anterior] ... -->
-
 <div class="box">
-<h1>Trilha Morro da Mesa</h1>
-<h2>23 de Novembro - Trilheiros de Rondonópolis</h2>
+  <h1>Trilha Morro da Mesa</h1>
+  <h2>23 de Novembro - Trilheiros de Rondonópolis</h2>
 
-<div id="alertaLotado">⚠️ Grupo lotado! As 75 vagas foram preenchidas.</div>
+  <div id="alertaLotado" style="display:none;">⚠️ Grupo lotado! As 75 vagas foram preenchidas.</div>
 
-<textarea readonly>
+  <textarea readonly>
 - O percurso tem nível médio a avançado, com trechos íngremes e escorregadios.
 - É obrigatório o uso de calçados adequados, água, protetor solar e roupas confortáveis.
 - É proibido o uso de caixas de som para preservar o ambiente.
@@ -14,25 +12,23 @@
 - A organização não se responsabiliza por acidentes causados por imprudência ou desrespeito às regras.
 - Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.
 - É indispensável estar em boas condições de saúde para participar da trilha.
-- Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou com histórico de desmaios/síncopes não são orientadas a realizar essa atividade.
+- Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou com histórico de desmaios/síncopes não são orientadas a realizar esta atividade.
 - Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.
 - Crianças menores de 14 anos não serão permitidas.
-</textarea>
+  </textarea>
 
-<label for="nome">Nome completo</label>
-<input type="text" id="nome" placeholder="Digite seu nome completo">
+  <label for="nome">Nome completo</label>
+  <input type="text" id="nome" placeholder="Digite seu nome completo">
 
-<label>
-<input type="checkbox" id="aceite"> Confirmo que li e aceito o termo de responsabilidade
-</label>
+  <label>
+    <input type="checkbox" id="aceite"> Confirmo que li e aceito o termo de responsabilidade
+  </label>
 
-<button id="entrarBtn" disabled>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="24" height="24">
+  <button id="entrarBtn" disabled>
     Entrar no grupo do WhatsApp
-</button>
-<div id="mensagemErro"></div>
-<p style="margin-top:10px; font-size:1.1em; color:#ccc;">Clique no botão para acessar o grupo do WhatsApp</p>
+  </button>
 
+  <div id="mensagemErro" style="color:red; margin-top:5px;"></div>
 </div>
 
 <script>
@@ -67,6 +63,7 @@ async function verificarStatus() {
         } else {
             alerta.style.display = "none";
             mensagemErro.textContent = "";
+            validar(); // reativa o botão se ainda houver vagas
         }
     } catch (e) {
         console.log("Erro ao verificar limite", e);
@@ -74,7 +71,6 @@ async function verificarStatus() {
 }
 
 botao.addEventListener("click", async () => {
-    await verificarStatus();
     if (botao.disabled) return;
 
     const nome = nomeInput.value.trim();
@@ -92,16 +88,15 @@ botao.addEventListener("click", async () => {
             return;
         }
 
-        window.open(JOIN_LINK, "_blank");
+        // Abre o link do WhatsApp sem mostrar no HTML
+        window.location.href = JOIN_LINK;
 
     } catch (e) {
         mensagemErro.textContent = "Erro ao enviar dados. Tente novamente.";
     }
 });
 
+// Checar status ao carregar e a cada 30 segundos
 verificarStatus();
 setInterval(verificarStatus, 30000);
 </script>
-
-</body>
-</html>
