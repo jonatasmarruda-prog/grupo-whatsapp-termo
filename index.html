@@ -80,16 +80,17 @@ button:hover:not(:disabled) {
 }
 #alertaLotado {
     background: #c40000;
-    padding: 14px;
-    border-radius: 10px;
+    padding: 20px;
+    border-radius: 12px;
     color: #fff;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.5em;
     display: none;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(255,0,0,0.7);
 }
 #vagasRestantes {
-    font-size: 1.4em;
+    font-size: 1.6em;
     font-weight: bold;
     margin-bottom: 20px;
 }
@@ -121,7 +122,7 @@ button:hover:not(:disabled) {
 <h1>Trilha Morro da Mesa</h1>
 <h2>23 de Novembro - Trilheiros de Rondonópolis</h2>
 
-<div id="vagasRestantes">Verificando vagas...</div>
+<div id="vagasRestantes">Vagas restantes: 75</div>
 <div id="alertaLotado">⚠️ Grupo lotado! As 75 vagas foram preenchidas.</div>
 
 <textarea readonly>
@@ -153,7 +154,6 @@ Pessoas com problemas cardíacos, respiratórios ou mobilidade reduzida devem co
 
 <script>
 const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
-const MAX_PARTICIPANTES = 75;
 const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz9m_YrXZ3pCNTsqnBX9XuNuTIINjQ0ErPpmkUyU9FkkYKv9bI5fWP2w93Ui9VjA1hs8Q/exec";
 
 const nomeInput = document.getElementById("nome");
@@ -180,25 +180,23 @@ async function verificarStatus() {
         const r = await fetch(WEBAPP_URL);
         const data = await r.json();
 
-        const vagas = MAX_PARTICIPANTES - data.total;
+        // usa vagasRestantes direto do Apps Script
+        vagasRestantes.textContent = "Vagas restantes: " + data.vagasRestantes;
 
-        if (data.total >= MAX_PARTICIPANTES) {
+        if (data.vagasRestantes > 20) vagasRestantes.className = "verde";
+        else if (data.vagasRestantes <= 20 && data.vagasRestantes > 5) vagasRestantes.className = "amarelo";
+        else vagasRestantes.className = "vermelho";
+
+        if (data.vagasRestantes <= 0) {
             botao.disabled = true;
             alerta.style.display = "block";
             vagasRestantes.textContent = "⚠️ Grupo lotado! As 75 vagas foram preenchidas.";
             vagasRestantes.className = "vermelho";
             mensagemErro.textContent = "Infelizmente o grupo já atingiu o limite de participantes. Fique atento aos próximos eventos!";
-            return;
+        } else {
+            alerta.style.display = "none";
+            mensagemErro.textContent = "";
         }
-
-        vagasRestantes.textContent = "Vagas restantes: " + vagas;
-        mensagemErro.textContent = "";
-
-        if (vagas > 20) vagasRestantes.className = "verde";
-        else if (vagas <= 20 && vagas > 5) vagasRestantes.className = "amarelo";
-        else vagasRestantes.className = "vermelho";
-
-        alerta.style.display = "none";
     } catch (e) {
         console.log("Erro ao verificar limite", e);
     }
@@ -224,6 +222,7 @@ botao.addEventListener("click", async () => {
             return;
         }
 
+        alert("Cadastro realizado com sucesso! Você será direcionado para o grupo.");
         window.open(JOIN_LINK, "_blank");
 
     } catch (e) {
