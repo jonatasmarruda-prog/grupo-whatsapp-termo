@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trilha Morro da Mesa 23 de Novembro - Trilheiros de Rondonópolis</title>
+<title>Trilha Morro da Mesa 23 de novembro - Trilheiros de Rondonópolis</title>
 
 <style>
 body {
@@ -15,15 +15,15 @@ body {
     text-align: center;
 }
 h1 {
-    font-size: 2.5em;
-    color: #fff;
+    font-size: 2.3em;
     margin-bottom: 5px;
+    color: #fff;
     text-shadow: 0 0 10px #28a745;
 }
 h2 {
-    font-size: 1.5em;
-    color: #fff;
+    font-size: 1.4em;
     margin-bottom: 20px;
+    color: #fff;
     text-shadow: 0 0 8px #28a745;
 }
 .box {
@@ -34,7 +34,7 @@ h2 {
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,255,0,0.5);
 }
-input[type="text"], input[type="tel"] {
+input[type="text"] {
     padding: 12px;
     margin: 10px 0;
     width: 95%;
@@ -44,7 +44,7 @@ input[type="text"], input[type="tel"] {
 }
 .termo {
     width: 95%;
-    height: 280px;
+    height: 320px;
     padding: 12px;
     margin: 15px 0;
     border-radius: 8px;
@@ -66,7 +66,7 @@ button {
     font-size: 1.2em;
     margin-top: 15px;
     width: 95%;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 button:hover:not(:disabled) {
     background: #1e7e34;
@@ -84,7 +84,7 @@ button:disabled {
     cursor: pointer;
 }
 #alertaLotado {
-    background: #c40000;
+    background: #b30000;
     color: white;
     padding: 12px;
     font-weight: bold;
@@ -92,11 +92,10 @@ button:disabled {
     border-radius: 8px;
     margin-bottom: 15px;
     display: none;
-    box-shadow: 0 0 10px rgba(255,0,0,0.8);
 }
 @media(max-width:600px){
     .termo {
-        height: 230px;
+        height: 250px;
     }
     button {
         font-size: 1em;
@@ -106,83 +105,76 @@ button:disabled {
         font-size: 2em;
     }
     h2 {
-        font-size: 1.2em;
+        font-size: 1.15em;
     }
 }
 </style>
 </head>
 <body>
 
-<div class="box">
+<div class="box" id="mainBox">
 
-<div id="alertaLotado">
-    Grupo lotado. Inscrição encerrada.
-</div>
+<div id="alertaLotado">Grupo lotado. Inscrição encerrada.</div>
 
-<h1>TRILHA MORRO DA MESA 23 DE NOVEMBRO</h1>
+<h1>Trilha Morro da Mesa 23 de novembro</h1>
 <h2>Trilheiros de Rondonópolis</h2>
 
 <form id="reservaForm">
-
-<input type="text" id="nome" placeholder="Digite seu nome completo" required>
-<input type="tel" id="telefone" placeholder="Digite seu WhatsApp com DDD" required>
+<input type="text" id="nome" placeholder="Digite seu nome completo" required><br>
 
 <textarea class="termo" readonly>
-TERMO DE RESPONSABILIDADE
+TERMO DE RESPONSABILIDADE E INSTRUÇÕES
 
-O percurso apresenta nível médio a difícil com trechos íngremes e escorregadios exigindo atenção e preparo físico adequado.
+O percurso tem nível médio a difícil com trechos íngremes e escorregadios. É obrigatório o uso de calçados apropriados, roupas confortáveis, protetor solar e água.
 
-É obrigatório o uso de calçados apropriados, roupas confortáveis, protetor solar e água.
+É proibido usar caixas de som ou consumir bebidas alcoólicas. Qualquer violação poderá resultar na retirada do participante.
 
-É proibido o uso de caixas de som e o consumo de bebidas alcoólicas. O descumprimento poderá resultar na exclusão imediata do participante.
+Todos devem preservar o meio ambiente, não deixar lixo e seguir as orientações do guia.
 
-Todos devem respeitar a natureza, não deixar lixo e seguir as orientações do guia.
-
-A organização poderá afastar qualquer pessoa que comprometer a segurança ou o andamento do passeio.
+A organização poderá afastar qualquer pessoa que coloque em risco o grupo ou o andamento do passeio.
 
 A organização não se responsabiliza por acidentes causados por imprudência ou falta de preparo físico.
 
-O passeio poderá ser adiado ou cancelado em caso de condições climáticas adversas.
+O passeio poderá ser cancelado ou adiado em caso de mau tempo.
 
-Declaro que estou ciente dos riscos envolvidos e isento os organizadores de qualquer responsabilidade decorrente da atividade.
+É indispensável estar em boas condições de saúde. Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou histórico de desmaios não devem participar.
+
+Participantes sem preparo físico devem avaliar os riscos antes de confirmar presença.
+
+Menores de catorze anos não poderão participar.
+
+Declaro que estou ciente dos riscos e isento os organizadores de qualquer responsabilidade decorrente da atividade.
 </textarea>
 
 <label class="checkbox-label">
 <input type="checkbox" id="aceite"> Li e aceito o termo de responsabilidade
 </label>
 
-<button type="submit" id="enviarBtn" disabled>Entrar no Grupo do WhatsApp</button>
-
+<button type="submit" id="enviarBtn" disabled>Entrar no grupo do WhatsApp</button>
 </form>
+
 </div>
 
 <script>
+// CONFIGURAÇÕES
 const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
 const MAX_PARTICIPANTES = 75;
 const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz9m_YrXZ3pCNTsqnBX9XuNuTIINjQ0ErPpmkUyU9FkkYKv9bI5fWP2w93Ui9VjA1hs8Q/exec";
 
 const nomeInput = document.getElementById("nome");
-const telefoneInput = document.getElementById("telefone");
 const aceiteCheckbox = document.getElementById("aceite");
 const enviarBtn = document.getElementById("enviarBtn");
 const alerta = document.getElementById("alertaLotado");
 
-function validarTelefone(tel) {
-    return /^[0-9]{10,11}$/.test(tel);
-}
-
+// Verifica se pode habilitar botão
 function checkForm() {
-    const nomeOK = nomeInput.value.trim().length > 3;
-    const telOK = validarTelefone(telefoneInput.value.trim());
-    const aceito = aceiteCheckbox.checked;
-
-    enviarBtn.disabled = !(nomeOK && telOK && aceito);
+    enviarBtn.disabled = !aceiteCheckbox.checked || !nomeInput.value.trim();
 }
 
 aceiteCheckbox.addEventListener("change", checkForm);
 nomeInput.addEventListener("input", checkForm);
-telefoneInput.addEventListener("input", checkForm);
 
+// Checa limite no servidor
 async function verificarLimite() {
     try {
         const resp = await fetch(WEBAPP_URL);
@@ -190,19 +182,21 @@ async function verificarLimite() {
         const total = data.total;
 
         if (total >= MAX_PARTICIPANTES) {
-            alerta.style.display = "block";
             enviarBtn.disabled = true;
+            alerta.style.display = "block";
             return true;
         } else {
             alerta.style.display = "none";
             checkForm();
             return false;
         }
-    } catch {
+    } catch (err) {
+        console.error(err);
         return true;
     }
 }
 
+// Envio
 document.getElementById("reservaForm").addEventListener("submit", async e => {
     e.preventDefault();
 
@@ -212,31 +206,21 @@ document.getElementById("reservaForm").addEventListener("submit", async e => {
         return;
     }
 
-    if (!validarTelefone(telefoneInput.value.trim())) {
-        alert("Digite um telefone válido.");
-        return;
-    }
-
     try {
         await fetch(WEBAPP_URL, {
             method: "POST",
-            body: new URLSearchParams({
-                nome: nomeInput.value.trim(),
-                telefone: telefoneInput.value.trim()
-            })
+            body: new URLSearchParams({ nome: nomeInput.value })
         });
-
         window.open(JOIN_LINK, "_blank");
-
     } catch (err) {
         console.error(err);
     }
 });
 
+// Atualização periódica
 verificarLimite();
 setInterval(verificarLimite, 5000);
 </script>
 
 </body>
 </html>
-
