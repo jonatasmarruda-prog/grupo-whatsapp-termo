@@ -1,214 +1,215 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Trilha Morro da Mesa 23 de novembro, Trilheiros de Rondonópolis</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trilha Morro da Mesa 23 de Novembro - Trilheiros de Rondonópolis</title>
+
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(180deg, #000000, #111111);
+    background: #000;
     color: #fff;
     margin: 0;
     padding: 20px;
     text-align: center;
-    font-size: 1.1em;
-    line-height: 1.5;
+}
+.box {
+    background: #111;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0,255,0,0.5);
 }
 h1 {
-    font-size: 2.2em;
-    color: #fff;
-    margin-bottom: 5px;
+    font-size: 2.4em;
+    margin-bottom: 10px;
     text-shadow: 0 0 10px #28a745;
 }
 h2 {
-    font-size: 1.3em;
-    color: #fff;
+    font-size: 1.4em;
     margin-bottom: 20px;
-    text-shadow: 0 0 8px #28a745;
+    color: #ccc;
 }
-.box {
-    max-width: 750px;
-    margin: auto;
-    background: #111;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,255,0,0.5);
-    transition: transform 0.3s;
-}
-.box:hover {
-    transform: scale(1.02);
-}
-input[type="text"] {
-    padding: 14px;
-    margin: 10px 0;
-    width: 95%;
-    border-radius: 8px;
+input, textarea {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.2em;
     border: none;
-    font-size: 1.1em;
+    border-radius: 10px;
+    margin-top: 12px;
+    box-sizing: border-box;
 }
-.termo {
-    width: 95%;
-    height: 320px;
-    padding: 14px;
-    margin: 15px 0;
-    border-radius: 8px;
-    border: none;
+textarea {
+    height: 280px;
     background: #222;
     color: #fff;
     resize: none;
-    overflow-y: scroll;
-    font-size: 1.05em;
-    line-height: 1.55;
+}
+label {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.2em;
 }
 button {
-    padding: 18px 30px;
+    width: 100%;
+    padding: 20px;
     border: none;
     border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
+    margin-top: 20px;
     background: #28a745;
     color: #fff;
     font-size: 1.3em;
-    margin-top: 15px;
-    width: 95%;
-    transition: all 0.3s ease;
-}
-button:hover:not(:disabled) {
-    background: #1e7e34;
-    transform: scale(1.05);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 button:disabled {
     background: #444;
     color: #999;
     cursor: not-allowed;
 }
-.checkbox-label {
-    display: block;
-    margin: 15px 0;
-    font-size: 1.15em;
-    cursor: pointer;
+button:hover:not(:disabled) {
+    transform: scale(1.05);
+    background: #1e7e34;
 }
 #alertaLotado {
     background: #c40000;
-    color: white;
     padding: 14px;
+    border-radius: 10px;
+    color: #fff;
     font-weight: bold;
     font-size: 1.2em;
-    border-radius: 8px;
-    margin-bottom: 15px;
     display: none;
-    box-shadow: 0 0 10px rgba(255,0,0,0.8);
+    margin-bottom: 10px;
 }
-@media(max-width:600px){
-    body {
-        font-size: 1.3em;
-        padding: 18px;
-    }
-    .box {
-        padding: 30px 20px;
-    }
-    input[type="text"] {
-        font-size: 1.25em;
-        padding: 16px;
-    }
-    .termo {
-        height: 300px;
-        font-size: 1.2em;
-        padding: 18px;
-        line-height: 1.6;
-    }
-    button {
-        font-size: 1.3em;
-        padding: 20px 24px;
-        width: 100%;
-        border-radius: 12px;
-    }
-    h1 {
-        font-size: 2.1em;
-        margin-bottom: 10px;
-    }
-    h2 {
-        font-size: 1.3em;
-        margin-bottom: 22px;
-    }
+#vagasRestantes {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
-    .termo {
-        height: 260px;
-        font-size: 1.1em;
-    }
-    button {
-        font-size: 1.2em;
-        padding: 16px 22px;
-    }
-    h1 {
-        font-size: 1.9em;
-    }
-    h2 {
-        font-size: 1.15em;
-    }
+.verde { color: #28a745; }
+.amarelo { color: #ffc107; }
+.vermelho { color: #c40000; }
+@media (max-width: 500px) {
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.2em; }
+    input, textarea, button { font-size: 1.2em; padding: 14px; }
+    label { font-size: 1.1em; }
 }
 </style>
 </head>
 <body>
-<header>
-<h1>Trilha Morro da Mesa 23 de novembro</h1>
+
+<div class="box">
+<h1>Trilha Morro da Mesa 23 de Novembro</h1>
 <h2>Trilheiros de Rondonópolis</h2>
-</header>
-<section>
-<div class="container">
-<h3>Confirmação de participação</h3>
-<p>Preencha seu nome e telefone, leia o termo e confirme a entrada. O grupo será fechado quando atingir o limite de vagas.</p>
-<div id="alertaGrupo" class="alert">Grupo lotado. Nenhuma inscrição adicional será aceita.</div>
-<label for="nome">Nome completo</label>
-<input type="text" id="nome" placeholder="Digite seu nome" />
-<label for="telefone">Telefone WhatsApp</label>
-<input type="text" id="telefone" placeholder="Digite seu número" />
-<label><input type="checkbox" id="termo" /> Concordo com o termo de participação</label>
-<button id="btnConfirmar">Confirmar presença</button>
-<div id="sucesso" class="success">Inscrição confirmada. Clique no botão abaixo para acessar o grupo.</div>
-<button id="btnGrupo" style="display:none">Entrar no grupo</button>
-<h3>Regras básicas</h3>
-<ul>
-<li>Respeite a natureza e mantenha o local limpo</li>
-<li>Leve água, lanterna, protetor solar e saco de lixo</li>
-<li>Evite ir até a borda da janela por risco de queda</li>
-<li>Trilhe sempre acompanhado e siga as orientações do condutor</li>
-</ul>
-<h3>Privacidade</h3>
-<p>Seu nome e telefone serão usados apenas para controle de vagas e organização da trilha.</p>
+
+<div id="alertaLotado">Grupo lotado. Inscrições encerradas.</div>
+<div id="vagasRestantes"></div>
+
+<textarea readonly>
+O percurso apresenta nível médio a avançado com trechos íngremes e escorregadios exigindo atenção e preparo físico adequado.
+É obrigatório o uso de calçados apropriados, roupas confortáveis, protetor solar e água.
+É proibido utilizar caixas de som para preservar o ambiente natural.
+O participante deve respeitar a natureza, não deixar lixo e seguir toda orientação do guia.
+A organização não assume responsabilidade por acidentes decorrentes de imprudência ou falta de preparo.
+Em condições climáticas adversas o passeio pode ser adiado ou cancelado.
+É fundamental estar em boas condições de saúde. Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou histórico de desmaios não devem participar.
+Participantes sedentários ou sem preparo físico precisam avaliar os riscos antes de confirmar presença.
+Crianças menores de quatorze anos não poderão participar.
+</textarea>
+
+<input type="text" id="nome" placeholder="Digite seu nome completo">
+<input type="text" id="telefone" placeholder="Digite seu número com DDD">
+
+<label>
+<input type="checkbox" id="aceite"> Confirmo que li e aceito o termo de responsabilidade
+</label>
+
+<button id="entrarBtn" disabled>Clique aqui para entrar no grupo do WhatsApp</button>
+
 </div>
-</section>
 
 <script>
-const limite = 75;
-let total = 0;
-const btn = document.getElementById("btnConfirmar");
-const grupo = document.getElementById("btnGrupo");
-const sucesso = document.getElementById("sucesso");
-const alerta = document.getElementById("alertaGrupo");
+const JOIN_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
+const MAX_PARTICIPANTES = 75;
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzK_Y9HAHMFqZBQAhEWjmJH5pdIYD2-Z9n4irlu7O0_/exec";
 
-function atualizar() {
-if (total >= limite) {
-btn.disabled = true;
-alerta.style.display = "block";
-}
+const nomeInput = document.getElementById("nome");
+const telInput = document.getElementById("telefone");
+const aceite = document.getElementById("aceite");
+const botao = document.getElementById("entrarBtn");
+const alerta = document.getElementById("alertaLotado");
+const vagasRestantes = document.getElementById("vagasRestantes");
+
+function validar() {
+    const nomeOk = nomeInput.value.trim().length > 3;
+    const telOk = /^[0-9]{10,12}$/.test(telInput.value.trim());
+    const aceito = aceite.checked;
+    botao.disabled = !(nomeOk && telOk && aceito);
 }
 
-btn.addEventListener("click", function () {
-const n = document.getElementById("nome").value.trim();
-const t = document.getElementById("telefone").value.trim();
-const termo = document.getElementById("termo").checked;
-if (!n || !t || !termo) {
-alert("Preencha nome, telefone e aceite o termo para continuar");
-return;
+nomeInput.addEventListener("input", validar);
+telInput.addEventListener("input", validar);
+aceite.addEventListener("change", validar);
+
+async function verificarStatus() {
+    try {
+        const r = await fetch(WEBAPP_URL);
+        const data = await r.json();
+
+        const vagas = MAX_PARTICIPANTES - data.total;
+        vagasRestantes.textContent = "Vagas restantes: " + vagas;
+
+        if (vagas > 20) vagasRestantes.className = "verde";
+        else if (vagas <= 20 && vagas > 5) vagasRestantes.className = "amarelo";
+        else vagasRestantes.className = "vermelho";
+
+        if (data.total >= MAX_PARTICIPANTES) {
+            botao.disabled = true;
+            alerta.style.display = "block";
+            vagasRestantes.textContent = "Vagas esgotadas!";
+            vagasRestantes.className = "vermelho";
+        } else {
+            alerta.style.display = "none";
+        }
+    } catch (e) {
+        console.log("Erro ao verificar limite", e);
+    }
 }
-total = total + 1;
-atualizar();
-sucesso.style.display = "block";
-grupo.style.display = "block";
-grupo.onclick = function(){ window.open("SEU_LINK_DO_GRUPO_AQUI", "_blank"); };
+
+botao.addEventListener("click", async () => {
+    await verificarStatus();
+    if (botao.disabled) return;
+
+    const nome = nomeInput.value.trim();
+    const telefone = telInput.value.trim();
+
+    try {
+        const resp = await fetch(WEBAPP_URL, {
+            method: "POST",
+            body: new URLSearchParams({ nome, telefone })
+        });
+
+        const resultado = await resp.json();
+
+        if (resultado.erro === "duplicado") {
+            alert("Este nome ou telefone já está inscrito.");
+            return;
+        }
+
+        window.open(JOIN_LINK, "_blank");
+
+    } catch (e) {
+        alert("Erro ao enviar dados. Tente novamente.");
+    }
 });
+
+verificarStatus();
+setInterval(verificarStatus, 6000);
 </script>
+
 </body>
 </html>
