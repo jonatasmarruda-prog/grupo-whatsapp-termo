@@ -1,155 +1,164 @@
-<style>
-/* ---------------------------------------------------- */
-/* TIPOGRAFIA, CORES E LAYOUT GLOBAL (MOBILE FIRST) */
-/* ---------------------------------------------------- */
-body {
-    font-family: 'Roboto', Arial, sans-serif;
-    padding: 1rem;
-    background: #121212; /* Fundo preto puro (Dark Mode Standard) */
-    color: #e0e0e0; /* Letras Brancas/Claras suavizadas */
-    line-height: 1.6; /* Aumenta o espaçamento entre linhas para melhor leitura */
-    margin: 0;
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MORRO DA MESA 23 DE NOVEMBRO</title>
 
-.box {
-    background: #1e1e1e; /* Fundo do box escuro, com contraste sutil */
-    padding: 1.5rem;
-    border-radius: 12px; /* Bordas mais suaves */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Sombra mais profunda */
-    max-width: 500px;
-    margin: 1rem auto; /* Garante margem superior e inferior */
-    border: 1px solid #333; /* Borda sutil para definir o box */
-}
+    <style>
+    /* ---------------------------------------------------- */
+    /* TIPOGRAFIA, CORES E LAYOUT GLOBAL (MOBILE FIRST) */
+    /* ---------------------------------------------------- */
+    body {
+        font-family: 'Roboto', Arial, sans-serif;
+        padding: 1rem; 
+        background: #121212; 
+        color: #e0e0e0; 
+        line-height: 1.6; 
+        margin: 0;
+    }
 
-/* ---------------------------------------------------- */
-/* TÍTULOS E SEÇÕES */
-/* ---------------------------------------------------- */
-h1 {
-    font-size: 1.9rem; /* Tamanho grande para destaque no celular */
-    margin-bottom: 0.1rem;
-    color: #4CAF50; /* Cor de destaque */
-    font-weight: 700; /* Negrito forte */
-}
+    .box {
+        background: #1e1e1e;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        max-width: 500px; /* Mantém a largura máxima para tablets/desktops */
+        margin: 1rem auto;
+        border: 1px solid #333;
+    }
 
-h2 {
-    font-size: 1.1rem; /* Subtítulo ideal para mobile */
-    margin-bottom: 1.5rem;
-    color: #b0b0b0; /* Cor mais suave para o subtítulo */
-    font-weight: 400;
-}
+    /* ---------------------------------------------------- */
+    /* TÍTULOS E SEÇÕES */
+    /* ---------------------------------------------------- */
+    h1 {
+        font-size: 1.9rem;
+        margin-bottom: 0.1rem;
+        color: #4CAF50;
+        font-weight: 700;
+    }
 
-/* ---------------------------------------------------- */
-/* COMPONENTES DE INTERAÇÃO */
-/* ---------------------------------------------------- */
-/* Área de texto de responsabilidade */
-textarea {
-    width: 100%;
-    height: 12rem; /* Altura ajustada para telas menores */
-    margin-bottom: 1.5rem;
-    padding: 0.9rem;
-    resize: none;
-    font-size: 0.9rem;
-    line-height: 1.7; /* Alto espaçamento para o termo de responsabilidade */
-    background-color: #2b2b2b;
-    color: #e0e0e0;
-    border: none; /* Remove a borda padrão para visual limpo */
-    border-radius: 8px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); /* Sombra interna sutil */
-}
+    h2 {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: #b0b0b0;
+        font-weight: 400;
+    }
 
-/* Labels */
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    font-weight: 500;
-}
+    /* ---------------------------------------------------- */
+    /* COMPONENTES DE INTERAÇÃO */
+    /* ---------------------------------------------------- */
+    /* Área de texto de responsabilidade */
+    textarea {
+        width: 100%;
+        height: 12rem;
+        margin-bottom: 1.5rem;
+        padding: 0.9rem;
+        resize: none;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        background-color: #2b2b2b;
+        color: #e0e0e0;
+        border: none;
+        border-radius: 8px;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    }
 
-/* Inputs de texto e checkbox */
-input[type="text"] {
-    width: 100%;
-    padding: 1rem;
-    margin: 0.3rem 0 1.5rem 0;
-    font-size: 1rem; /* Tamanho ótimo para input no celular */
-    box-sizing: border-box;
-    background-color: #2b2b2b;
-    color: #e0e0e0;
-    border: 1px solid #444;
-    border-radius: 8px;
-    transition: border-color 0.3s;
-}
-input[type="text"]:focus {
-    border-color: #4CAF50; /* Foco em verde */
-    outline: none;
-}
+    /* Labels */
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
 
-/* Checkbox */
-input[type="checkbox"] {
-    margin-right: 0.6rem;
-    transform: scale(1.15); /* Checkbox um pouco maior para facilitar o toque */
-    vertical-align: middle;
-}
+    /* Inputs de texto e checkbox */
+    input[type="text"] {
+        width: 100%;
+        padding: 1rem;
+        margin: 0.3rem 0 1.5rem 0;
+        font-size: 1rem;
+        box-sizing: border-box;
+        background-color: #2b2b2b;
+        color: #e0e0e0;
+        border: 1px solid #444;
+        border-radius: 8px;
+        transition: border-color 0.3s;
+    }
+    input[type="text"]:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
 
-/* ---------------------------------------------------- */
-/* BOTÃO E FEEDBACK */
-/* ---------------------------------------------------- */
-button {
-    width: 100%;
-    padding: 1.1rem;
-    margin-top: 1rem; /* Adiciona espaçamento superior ao botão principal */
-    font-size: 1.05rem;
-    font-weight: bold;
-    background-color: #25D366;
-    color: #1a1a1a;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-}
+    /* Checkbox */
+    input[type="checkbox"] {
+        margin-right: 0.6rem;
+        transform: scale(1.15);
+        vertical-align: middle;
+    }
 
-button:hover:not(:disabled) {
-    background-color: #1FAF54;
-    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
-}
+    /* ---------------------------------------------------- */
+    /* BOTÃO E FEEDBACK */
+    /* ---------------------------------------------------- */
+    button {
+        width: 100%;
+        padding: 1.1rem;
+        margin-top: 1rem;
+        font-size: 1.05rem;
+        font-weight: bold;
+        background-color: #25D366;
+        color: #1a1a1a;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, opacity 0.3s ease;
+    }
 
-button:disabled {
-    background-color: #383838; /* Cinza escuro para desabilitado */
-    color: #888;
-    cursor: not-allowed;
-}
+    button:hover:not(:disabled) {
+        background-color: #1FAF54;
+        box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+    }
 
-/* Contador de vagas */
-#vagasInfo {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #4CAF50;
-    padding: 0.75rem;
-    border: 2px solid #4CAF50; /* Borda mais grossa para destaque */
-    border-radius: 8px;
-    background-color: #2b2b2b;
-}
+    button:disabled {
+        background-color: #383838;
+        color: #888;
+        cursor: not-allowed;
+    }
 
-/* Mensagem de Lotado e Erro */
-#alertaLotado {
-    font-size: 1.1rem;
-    padding: 1rem;
-    background-color: #d32f2f; /* Vermelho mais forte (Material Design) */
-    color: white;
-    border-radius: 8px;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-weight: bold;
-}
+    /* Contador de vagas */
+    #vagasInfo {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #4CAF50;
+        padding: 0.75rem;
+        border: 2px solid #4CAF50;
+        border-radius: 8px;
+        background-color: #2b2b2b;
+    }
 
-#mensagemErro {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    color: #ff8a80;
-    text-align: center;
-}
-</style>
+    /* Mensagem de Lotado e Erro */
+    #alertaLotado {
+        font-size: 1.1rem;
+        padding: 1rem;
+        background-color: #d32f2f;
+        color: white;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-weight: bold;
+    }
+
+    #mensagemErro {
+        margin-top: 1rem;
+        font-size: 0.95rem;
+        color: #ff8a80;
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
 
 <div class="box">
     <h1>MORRO DA MESA 23 DE NOVEMBRO</h1>
@@ -192,6 +201,9 @@ button:disabled {
     // Capacidade máxima do grupo
     const MAX_VAGAS = 75;
     let vagasDisponiveis = MAX_VAGAS; 
+    
+    // ** ATENÇÃO: COLOQUE SEU LINK DO GRUPO DO WHATSAPP AQUI **
+    const LINK_WHATSAPP = 'https://chat.whatsapp.com/SEULINKDECONVITE'; 
 
     // Referências aos elementos do DOM
     const nomeInput = document.getElementById('nome');
@@ -202,7 +214,6 @@ button:disabled {
     const vagasRestantesSpan = document.getElementById('vagasRestantes');
     const vagasInfoDiv = document.getElementById('vagasInfo');
 
-    // Função para verificar os campos e habilitar/desabilitar o botão
     function checkInputs() {
         const nomeValido = nomeInput.value.trim() !== '';
         const aceiteValido = aceiteCheckbox.checked;
@@ -214,20 +225,17 @@ button:disabled {
         }
     }
 
-    // Função para atualizar o número de vagas na tela e verificar o estado de lotado
     function atualizarContador() {
         vagasRestantesSpan.textContent = vagasDisponiveis;
         
-        // Bloqueio Imediato
         if (vagasDisponiveis <= 0) {
             entrarBtn.style.display = 'none';
-            alertaLotado.style.display = 'block'; // Mostrar mensagem de lotado
-            vagasInfoDiv.style.display = 'none'; // Esconder contador
+            alertaLotado.style.display = 'block';
+            vagasInfoDiv.style.display = 'none';
             mensagemErro.textContent = '';
         }
     }
 
-    // Função executada ao clicar no botão
     function handleRegistro(event) {
         event.preventDefault();
 
@@ -240,22 +248,23 @@ button:disabled {
         
         // 2. Atualiza a tela
         atualizarContador();
-
-        // 3. Exibe uma mensagem de sucesso simulada (em um caso real, seria um redirecionamento ao link)
-        mensagemErro.innerHTML = '<span style="color:#25D366; font-weight: bold;">✅ Vaga reservada! Você seria redirecionado para o WhatsApp agora.</span>';
         
+        // 3. Redireciona para o WhatsApp
+        window.location.href = LINK_WHATSAPP;
+
         // 4. Limpa e reseta
         nomeInput.value = '';
         aceiteCheckbox.checked = false;
         checkInputs();
     }
     
-    // Event Listeners
     nomeInput.addEventListener('input', checkInputs);
     aceiteCheckbox.addEventListener('change', checkInputs);
     entrarBtn.addEventListener('click', handleRegistro);
     
-    // Inicialização
     atualizarContador();
     checkInputs();
 </script>
+
+</body>
+</html>
