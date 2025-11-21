@@ -1,178 +1,317 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TRILHA MORRO DA MESA</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MORRO DA MESA — 23 DE NOVEMBRO</title>
 
 <style>
-body {
-    background: #0a0a0a;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+  :root{
+    --bg: #05060a;
+    --panel: #0f1620;
+    --muted: #bfc9d9;
+    --blue: #4da8ff;
+    --blue-soft: rgba(77,168,255,0.12);
+    --glass: rgba(255,255,255,0.03);
+  }
 
-/* Container */
-.box {
-    max-width: 650px;
-    margin: 20px auto;
-    background: #111111;
-    padding: 25px;
-    border-radius: 12px;
-    border: 2px solid #0ff;
-    box-shadow: 0 0 18px #0ff;
-}
+  html,body{
+    height:100%;
+    margin:0;
+    font-family: "Inter", "Roboto", Arial, sans-serif;
+    background: linear-gradient(180deg, #030406 0%, var(--bg) 100%);
+    color: #e8f0ff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    font-size:16px;
+  }
 
-/* Título */
-h1 {
-    text-align: center;
-    font-size: 32px;
-    color: #0ff;
-    letter-spacing: 2px; 
-    margin-bottom: 10px;
-}
+  /* Container central responsivo */
+  .wrap{
+    max-width:720px;
+    margin:20px auto;
+    padding:22px;
+  }
 
-/* Subtítulo */
-h2 {
-    text-align: center;
-    font-size: 22px;
-    color: #ffffff;
-    margin-bottom: 25px;
-}
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), var(--panel));
+    border-radius:14px;
+    padding:20px;
+    box-shadow: 0 8px 36px rgba(24,40,80,0.45), 0 0 28px rgba(77,168,255,0.06) inset;
+    border: 1px solid rgba(77,168,255,0.10);
+  }
 
-/* Inputs */
-input[type="text"], input[type="checkbox"] {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 8px;
-    border: 1px solid #0ff;
-    background: #1a1a1a;
-    color: white;
-}
+  /* Título grande e em letras maiúsculas */
+  h1{
+    font-size:2.4rem;
+    margin:6px 0 4px 0;
+    text-align:center;
+    color:var(--blue);
+    letter-spacing:2px;
+    font-weight:800;
+    text-transform:uppercase;
+    text-shadow: 0 4px 22px rgba(77,168,255,0.14);
+  }
 
-label {
-    display: block;
-    margin-top: 20px;
-    font-size: 17px;
-}
+  h2{
+    font-size:1rem;
+    text-align:center;
+    color:var(--muted);
+    margin:0 0 18px 0;
+    font-weight:600;
+  }
 
-/* Botão */
-button {
-    width: 100%;
-    padding: 14px;
-    background: #00ffff;
-    color: #000000;
-    border: none;
-    font-size: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 0 15px #00ffff;
-    margin-top: 20px;
-}
+  /* Contador de vagas */
+  .vagasBox{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px;
+    border-radius:10px;
+    background: linear-gradient(180deg, rgba(77,168,255,0.02), transparent);
+    border: 1px solid rgba(77,168,255,0.08);
+    color:var(--blue);
+    font-weight:700;
+    margin-bottom:14px;
+    box-shadow: 0 6px 18px rgba(77,168,255,0.04);
+  }
 
-button:hover {
-    background: #0ff;
-    transform: scale(1.03);
-}
+  .vagasBox span.count{
+    font-size:1.05rem;
+    color:#e6f4ff;
+    background:var(--blue-soft);
+    padding:6px 10px;
+    border-radius:8px;
+    font-weight:800;
+    border: 1px solid rgba(77,168,255,0.08);
+  }
 
-/* Aviso de grupo lotado */
-#alertaLotado {
-    display: none;
-    background: #ff0000;
-    padding: 12px;
-    margin-bottom: 18px;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: bold;
-}
+  /* Box do termo com scroll */
+  .termo{
+    background:var(--glass);
+    border-radius:10px;
+    padding:14px;
+    height:300px;
+    overflow:auto;
+    color:#dbe9ff;
+    line-height:1.7;
+    border: 1px solid rgba(255,255,255,0.03);
+    margin-bottom:14px;
+  }
 
-/* Termos */
-.termos {
-    background: #1a1a1a;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 20px;
-    border: 1px solid #0ff;
-}
+  .termo p{
+    margin:12px 0;
+  }
 
-.termos p {
-    margin: 10px 0;
-}
+  /* Ação para aceitar */
+  .actions{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:6px;
+  }
+
+  label.checkbox{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    cursor:pointer;
+    color:var(--muted);
+    font-weight:600;
+    user-select:none;
+  }
+
+  input[type="checkbox"]{
+    width:20px;
+    height:20px;
+    accent-color: var(--blue);
+    transform:scale(1.05);
+  }
+
+  /* Botões */
+  .btn{
+    display:block;
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    text-align:center;
+    font-weight:800;
+    font-size:1.05rem;
+    cursor:pointer;
+    border:none;
+    transition: transform .12s ease, box-shadow .15s ease, opacity .12s ease;
+  }
+
+  .btn-entrar{
+    background: linear-gradient(180deg, var(--blue), #1b71c8);
+    color:#021022;
+    box-shadow: 0 10px 30px rgba(29,94,165,0.22), 0 0 28px rgba(77,168,255,0.14);
+    display:none;
+  }
+
+  .btn-entrar:active{
+    transform: translateY(1px) scale(.998);
+  }
+
+  .btn-aceitar{
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.06);
+    color:var(--muted);
+    box-shadow: 0 6px 22px rgba(8,12,20,0.6) inset;
+  }
+
+  .btn-aceitar:active{
+    transform: translateY(1px);
+  }
+
+  /* Box lotado */
+  .lotado{
+    display:none;
+    margin-top:12px;
+    padding:12px;
+    border-radius:10px;
+    background: linear-gradient(180deg, #5f0000, #a70000);
+    color:#fff;
+    text-align:center;
+    font-weight:800;
+  }
+
+  /* Responsividade */
+  @media (max-width:420px){
+    .wrap{ padding:12px; }
+    h1{ font-size:1.8rem; }
+    .termo{ height:240px; padding:12px; font-size:0.98rem; }
+    .vagasBox{ font-size:0.95rem; padding:10px; }
+  }
 </style>
-
 </head>
 <body>
+  <div class="wrap">
+    <div class="card" role="region" aria-label="Inscrição trilha Morro da Mesa">
 
-<div class="box">
-    
-    <div id="alertaLotado">⚠️ Grupo lotado. As 75 vagas foram preenchidas.</div>
+      <h1>Morro da Mesa</h1>
+      <h2>23 de novembro, Trilheiros de Rondonópolis</h2>
 
-    <h1>TRILHA MORRO DA MESA</h1>
-    <h2>23 DE NOVEMBRO</h2>
+      <div class="vagasBox" aria-live="polite">
+        <div>Vagas disponíveis</div>
+        <div><span id="vagasNum" class="count">—</span> / 75</div>
+      </div>
 
-    <label>Seu nome</label>
-    <input type="text" id="nome" placeholder="Digite seu nome">
+      <div id="lotado" class="lotado" role="status" aria-hidden="true">
+        Grupo lotado. As 75 vagas foram preenchidas.
+      </div>
 
+      <div class="termo" id="termo">
+        <p>- O percurso tem nível médio a avançado. Há trechos íngremes e com risco de escorregar.</p>
+        <p>- É obrigatório usar calçado adequado. Leve água, protetor solar e roupas confortáveis.</p>
+        <p>- Caixa de som não é permitida. Preserve a natureza e o ambiente.</p>
+        <p>- Cada participante deve manter o local limpo e seguir orientações do guia.</p>
+        <p>- A organização não assume responsabilidade por acidentes por imprudência.</p>
+        <p>- Em caso de clima desfavorável o passeio poderá ser cancelado ou adiado.</p>
+        <p>- É necessário estar em boas condições de saúde para participar.</p>
+        <p>- Pessoas com problemas cardíacos, respiratórios ou histórico de desmaio não devem fazer esta atividade.</p>
+        <p>- Participantes sedentários devem avaliar os riscos antes de confirmar.</p>
+        <p>- Crianças menores de 14 anos não podem participar.</p>
+      </div>
 
-    <div class="termos">
-        <label><input type="checkbox" id="termo"> Aceito os termos</label>
+      <div class="actions" aria-hidden="false">
+        <label class="checkbox" for="aceite">
+          <input id="aceite" type="checkbox" />
+          Confirmo que li e aceito o termo de responsabilidade
+        </label>
 
-        <p>- Proibido caixa de som  
-        <p>- Respeitar o ritmo do grupo  
-        <p>- Obrigatório seguir as orientações do condutor  
-        <p>- Cada participante é responsável por seus pertences  
-        <p>- Risco natural da trilha reconhecido  
+        <!-- botão aceita, opcional caso queira ocultar e só mostrar o entrar -->
+        <button id="btnEntrarGrupo" class="btn btn-entrar" aria-hidden="true">
+          Clica aqui para entrar no grupo
+        </button>
+
+      </div>
+
     </div>
-
-    <button onclick="entrar()">Clica aqui para entrar no grupo</button>
-
-</div>
+  </div>
 
 <script>
-// Limite de vagas
-const LIMITE_VAGAS = 75;
+  // Configurações
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz9m_YrXZ3pCNTsqnBX9XuNuTIINjQ0ErPpmkUyU9FkkYKv9bI5fWP2w93Ui9VjA1hs8Q/exec";
+  const WHATSAPP_LINK = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
+  const LIMITE = 75;
 
-// Link do grupo
-const LINK_WHATSAPP = "https://chat.whatsapp.com/GOReIoh8N0ZCa4pQh2IMy7";
+  // Elementos
+  const vagasNumEl = document.getElementById("vagasNum");
+  const lotadoEl = document.getElementById("lotado");
+  const aceiteEl = document.getElementById("aceite");
+  const btnEntrar = document.getElementById("btnEntrarGrupo");
 
-// Simulação de contagem (troque pelo contador real do Apps Script se quiser)
-let totalInscritos = 0;
-
-// Bloqueia quando atingir 75
-function verificarVagas() {
-    if (totalInscritos >= LIMITE_VAGAS) {
-        document.getElementById("alertaLotado").style.display = "block";
-        document.querySelector("button").disabled = true;
-        document.querySelector("button").style.background = "#555";
+  // Função para atualizar UI quando lotado
+  function bloquearSeLotado(vagas){
+    if (typeof vagas !== "number") return;
+    if (vagas <= 0){
+      // mostra mensagem lotado
+      lotadoEl.style.display = "block";
+      lotadoEl.setAttribute("aria-hidden","false");
+      // ajusta contador visual
+      vagasNumEl.textContent = 0;
+      // desabilita aceitação
+      aceiteEl.checked = false;
+      aceiteEl.disabled = true;
+      // esconde botão de entrada caso visível
+      btnEntrar.style.display = "none";
+      btnEntrar.setAttribute("aria-hidden","true");
+    } else {
+      // ainda tem vagas
+      lotadoEl.style.display = "none";
+      lotadoEl.setAttribute("aria-hidden","true");
+      aceiteEl.disabled = false;
+      vagasNumEl.textContent = vagas;
     }
-}
-verificarVagas();
+  }
 
-// Função do botão
-function entrar() {
-    const nome = document.getElementById("nome").value;
-    const termo = document.getElementById("termo").checked;
-
-    if (nome.trim() === "") {
-        alert("Preencha seu nome");
-        return;
+  // Busca o número de vagas direto do Apps Script
+  async function fetchVagas(){
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, { cache: "no-cache" });
+      if (!res.ok) throw new Error("Erro na resposta");
+      const data = await res.json();
+      // espera objeto { vagas: number } vindo do Apps Script
+      let vagas = Number(data.vagas);
+      if (Number.isNaN(vagas)) vagas = 0;
+      // atualiza UI
+      vagasNumEl.textContent = vagas;
+      bloquearSeLotado(vagas);
+    } catch (err) {
+      // em caso de falha, exibe traço no contador, mantém funcionalidade
+      vagasNumEl.textContent = "—";
+      console.error("Erro ao buscar vagas", err);
     }
+  }
 
-    if (!termo) {
-        alert("Você precisa aceitar os termos");
-        return;
+  // Mostrar botão de entrada somente após aceitar o termo
+  aceiteEl.addEventListener("change", () => {
+    if (aceiteEl.checked){
+      // só mostra se ainda houver vagas
+      if (vagasNumEl.textContent === "—" || Number(vagasNumEl.textContent) > 0){
+        btnEntrar.style.display = "block";
+        btnEntrar.setAttribute("aria-hidden","false");
+      } else {
+        // se estiver lotado, garante bloqueio
+        bloquearSeLotado(0);
+      }
+    } else {
+      btnEntrar.style.display = "none";
+      btnEntrar.setAttribute("aria-hidden","true");
     }
+  });
 
-    alert("Entrada confirmada. Clique em OK para acessar o grupo");
+  // Ao clicar, redireciona direto para o grupo, sem mensagens de confirmação
+  btnEntrar.addEventListener("click", () => {
+    // redirecionamento simples
+    window.location.href = WHATSAPP_LINK;
+  });
 
-    window.location.href = LINK_WHATSAPP;
-}
+  // Polling para manter contador atualizado, intervalo 6 segundos
+  fetchVagas();
+  setInterval(fetchVagas, 6000);
 </script>
-
 </body>
 </html>
