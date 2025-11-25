@@ -1,1 +1,164 @@
-https://chatgpt.com/share/04ce2ecc-9c18-456b-8192-f4ffec2c8b98
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de Confirmados - Morro da Mesa</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    background: #0b0b0b;
+    color: #ffffff;
+    padding: 0;
+  }
+
+  .topo {
+    text-align: center;
+    padding: 20px;
+    background: #111;
+    border-bottom: 2px solid #222;
+  }
+
+  .logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin: 10px 0 5px 0;
+  }
+
+  h2 {
+    font-size: 16px;
+    color: #cccccc;
+    margin-top: 0;
+  }
+
+  .contador {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .box {
+    background: #161616;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 15px;
+    box-shadow: 0 0 10px #000;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    background: #222;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    border-left: 4px solid #28a745;
+  }
+
+  button {
+    width: 90%;
+    padding: 14px;
+    border: none;
+    margin: 10px auto;
+    display: block;
+    border-radius: 10px;
+    background: #0066ff;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .limpar {
+    background: #c30000;
+  }
+
+  .rodape {
+    text-align: center;
+    padding: 20px;
+    color: #aaa;
+    font-size: 16px;
+    margin-top: 15px;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="topo">
+  <img class="logo" src="https://i.imgur.com/MwHr761.png"
+       onclick="window.location.href='index.html'">
+  <h1>Painel de Confirmados</h1>
+  <h2>Morro da Mesa - 30 de Novembro</h2>
+</div>
+
+<div class="contador" id="contador">Carregando...</div>
+
+<div class="box">
+  <h3>Lista de Participantes</h3>
+  <ul id="lista"></ul>
+</div>
+
+<button onclick="baixar()">📥 Baixar lista</button>
+<button class="limpar" onclick="limpar()">🗑 Limpar lista</button>
+
+<div class="rodape">
+  Trilheiros de Rondonópolis 🚶‍♂️🌄
+</div>
+
+<script>
+function carregarLista() {
+  let lista = JSON.parse(localStorage.getItem("listaMorroMesa")) || [];
+
+  document.getElementById("contador").innerHTML =
+    "Total de confirmados: " + lista.length;
+
+  let ul = document.getElementById("lista");
+  ul.innerHTML = "";
+
+  lista.forEach((nome) => {
+    let li = document.createElement("li");
+    li.textContent = nome;
+    ul.appendChild(li);
+  });
+}
+
+function baixar() {
+  let lista = JSON.parse(localStorage.getItem("listaMorroMesa")) || [];
+  let conteudo = lista.join("\n");
+
+  let blob = new Blob([conteudo], { type: "text/plain" });
+  let url = URL.createObjectURL(blob);
+
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = "confirmados-morro-da-mesa.txt";
+  a.click();
+}
+
+function limpar() {
+  if (confirm("Tem certeza que deseja apagar todos os nomes?")) {
+    localStorage.removeItem("listaMorroMesa");
+    carregarLista();
+  }
+}
+
+carregarLista();
+</script>
+
+</body>
+</html>
