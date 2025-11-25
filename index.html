@@ -5,27 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trilha Morro da Mesa - Termo</title>
 
-<!-- Firebase compatível -->
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
 <style>
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
     background: #0b0b0b;
     color: #fff;
+    font-family: Arial, sans-serif;
   }
 
   .topo {
     text-align: center;
     padding: 25px 10px;
     background: #111;
+    border-bottom: 2px solid #222;
   }
 
   .logo {
-    width: 95px;
-    height: 95px;
+    width: 100px;
     border-radius: 50%;
     cursor: pointer;
   }
@@ -36,19 +36,17 @@
   }
 
   h2 {
-    margin: 5px 0;
     color: #ccc;
-    font-size: 18px;
+    margin: 5px 0 15px;
   }
 
   .alerta {
     background: #b30000;
     padding: 12px;
     margin: 15px;
-    border-radius: 10px;
     text-align: center;
+    border-radius: 10px;
     font-weight: bold;
-    font-size: 16px;
   }
 
   .box {
@@ -61,21 +59,21 @@
   }
 
   .aceite-area {
-    margin: 20px 15px;
+    margin: 20px;
     font-size: 17px;
   }
 
   input[type="checkbox"] {
-    transform: scale(1.3);
     margin-right: 10px;
+    transform: scale(1.3);
   }
 
   input[type="text"] {
     width: 100%;
     padding: 14px;
-    margin-top: 10px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
+    margin-top: 12px;
     background: #222;
     color: #fff;
     font-size: 17px;
@@ -84,15 +82,14 @@
   button {
     width: 90%;
     padding: 15px;
-    border: none;
-    border-radius: 12px;
     background: #28a745;
     color: #fff;
-    font-size: 20px;
+    border: none;
+    border-radius: 12px;
     font-weight: bold;
+    font-size: 20px;
     display: block;
     margin: 20px auto;
-    cursor: pointer;
   }
 
   .sucesso {
@@ -100,17 +97,15 @@
     margin: 20px auto;
     padding: 15px;
     background: #155724;
-    border-radius: 10px;
+    border-radius: 12px;
     text-align: center;
     color: #d4edda;
-    font-size: 17px;
   }
 
   .rodape {
     text-align: center;
-    padding: 25px;
+    padding: 20px;
     color: #888;
-    font-size: 16px;
   }
 </style>
 </head>
@@ -130,7 +125,6 @@
 <div class="box">
   <h3>📄 Termo de Responsabilidade</h3>
 
-  <p>
   - O percurso tem nível médio a avançado, com trechos íngremes e escorregadios.<br><br>
   - É obrigatório o uso de calçados adequados, água, protetor solar e roupas confortáveis.<br><br>
   - É proibido o uso de caixas de som para preservar o ambiente.<br><br>
@@ -138,16 +132,13 @@
   - A organização não se responsabiliza por acidentes causados por imprudência ou desrespeito às regras.<br><br>
   - Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.<br><br>
   - É indispensável estar em boas condições de saúde para participar da trilha.<br><br>
-  - Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou com histórico de desmaios/síncopes não são orientadas a realizar essa atividade.<br><br>
-  - Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.<br><br>
+  - Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou histórico de desmaios/síncopes não são orientadas a participar.<br><br>
+  - Participantes sedentários devem avaliar os riscos antes de confirmar presença.<br><br>
   - Crianças menores de 14 anos não serão permitidas.<br><br>
-  </p>
 </div>
 
 <div class="aceite-area">
-  <label>
-    <input type="checkbox" id="aceito"> Li e aceito o termo de responsabilidade.
-  </label>
+  <label><input type="checkbox" id="aceito"> Li e aceito o termo de responsabilidade.</label>
 </div>
 
 <div class="aceite-area">
@@ -164,7 +155,7 @@
 </div>
 
 <script>
-// CONFIG FIREBASE (CORRETO)
+// CONFIG DO FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCJJI6pWI7ENDfmbYwGMbh8SHnlB6QQOHk",
   authDomain: "trilha-morro-da-mesa-cd2fe.firebaseapp.com",
@@ -172,14 +163,12 @@ const firebaseConfig = {
   projectId: "trilha-morro-da-mesa-cd2fe",
   storageBucket: "trilha-morro-da-mesa-cd2fe.firebasestorage.app",
   messagingSenderId: "826498874996",
-  appId: "1:826498874996:web:007837e92c11ee4ef4db21",
-  measurementId: "G-KTHERDDMWD"
+  appId: "1:826498874996:web:007837e92c11ee4ef4db21"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// SALVAR NO FIREBASE
 function salvar() {
   const nome = document.getElementById("nome").value.trim();
   const aceito = document.getElementById("aceito").checked;
@@ -197,7 +186,7 @@ function salvar() {
   db.ref("confirmados").push(nome);
 
   document.getElementById("msg").innerHTML =
-    `<div class="sucesso">✔ Presença confirmada com sucesso!</div>`;
+    `<div class="sucesso">✔ Presença confirmada!</div>`;
 
   document.getElementById("nome").value = "";
   document.getElementById("aceito").checked = false;
@@ -206,4 +195,3 @@ function salvar() {
 
 </body>
 </html>
-
