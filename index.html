@@ -3,112 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trilha Morro da Mesa - Termo</title>
+<title>Painel de Confirmados</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js"></script>
 
 <style>
   body {
-    margin: 0;
-    font-family: "Arial", sans-serif;
     background: #0b0b0b;
-    color: #ffffff;
-    padding: 0;
+    color: #fff;
+    font-family: Arial;
+    margin: 0;
   }
-
   .topo {
     text-align: center;
     padding: 20px;
-    background: #111;
-    border-bottom: 2px solid #222;
+    background:#111;
   }
-
   .logo {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    cursor: pointer;
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    cursor:pointer;
   }
-
-  h1 {
-    font-size: 22px;
-    margin: 10px 0 5px 0;
-  }
-
-  h2 {
-    font-size: 16px;
-    color: #cccccc;
-    margin-top: 0;
-  }
-
-  .alerta {
-    background: #b30000;
-    padding: 12px;
-    margin: 15px;
-    border-radius: 10px;
-    font-weight: bold;
-    text-align: center;
-    font-size: 17px;
-  }
-
-  .box {
-    background: #161616;
-    padding: 18px;
-    border-radius: 12px;
-    margin: 15px;
-    box-shadow: 0 0 10px #000;
-    font-size: 17px;
-    line-height: 1.5;
-  }
-
-  .aceite-area {
-    margin: 20px 15px;
-    font-size: 17px;
-  }
-
-  input[type="checkbox"] {
-    transform: scale(1.4);
-    margin-right: 10px;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: none;
-    background: #222;
-    color: #fff;
-    font-size: 17px;
-  }
-
-  button {
-    width: 90%;
-    padding: 15px;
-    border: none;
-    display: block;
-    margin: 20px auto;
-    border-radius: 12px;
-    background: #28a745;
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  .sucesso {
-    margin: 20px;
-    padding: 15px;
-    background: #155724;
-    color: #d4edda;
-    border-radius: 10px;
-    font-size: 17px;
-    text-align: center;
-  }
-
-  .rodape {
-    text-align: center;
-    padding: 25px;
-    color: #aaa;
-    font-size: 16px;
+  li {
+    background:#222;
+    padding:12px;
+    margin:10px;
+    border-radius:8px;
+    font-size:18px;
+    border-left:4px solid #28a745;
   }
 </style>
 
@@ -117,81 +41,50 @@
 
 <div class="topo">
   <img class="logo" src="https://i.imgur.com/MwHr761.png"
-       onclick="window.location.href='painel.html'">
-  <h1>Trilha Morro da Mesa</h1>
-  <h2>30 de Novembro</h2>
+       onclick="window.location.href='index.html'">
+  <h1>Painel de Confirmados</h1>
 </div>
 
-<div class="alerta">
-  ⚠ ESTE PASSEIO É EM GRUPO — VAMOS TODOS JUNTOS!  
-  <br>É proibido se afastar do grupo.
-</div>
+<h2 id="contador" style="text-align:center;"></h2>
 
-<div class="box">
-  <h3>📄 Termo de Responsabilidade</h3>
-  <p>
-  • O percurso possui nível médio a avançado, com trechos íngremes, pedras soltas e escorregadios.<br><br>
-  • Uso obrigatório de calçado adequado, água, roupas leves e protetor solar.<br><br>
-  • Proibido o uso de caixas de som.<br>
-  • Proibido bebidas alcoólicas ou energéticos.<br>
-  • Proibido se afastar do grupo ou desobedecer orientações.<br><br>
-  • Respeite a natureza: não deixe lixo.<br><br>
-  • A organização não se responsabiliza por acidentes causados por imprudência.<br><br>
-  • Em caso de chuva ou risco climático, o passeio pode ser adiado.<br><br>
-  • Necessário estar em boas condições de saúde.<br>
-  • Pessoas com problemas cardíacos ou respiratórios não devem participar.<br><br>
-  • Participantes sedentários devem avaliar os riscos antes de confirmar.<br><br>
-  • Crianças menores de 14 anos não podem participar.<br>
-  • Animais domésticos não são permitidos.<br><br>
-  </p>
-</div>
-
-<div class="aceite-area">
-  <label>
-    <input type="checkbox" id="aceito"> Li e aceito o termo de responsabilidade.
-  </label>
-</div>
-
-<div class="aceite-area">
-  <h3>✍️ Digite seu nome</h3>
-  <input type="text" id="nome" placeholder="Seu nome completo">
-</div>
-
-<button onclick="salvar()">Confirmar Presença</button>
-
-<div id="msg"></div>
-
-<div class="rodape">
-  Trilheiros de Rondonópolis 🚶‍♂️🌄
-</div>
+<ul id="lista"></ul>
 
 <script>
-function salvar() {
-  const nome = document.getElementById("nome").value.trim();
-  const aceito = document.getElementById("aceito").checked;
+// CONFIG FIREBASE
+const firebaseConfig = {
+  apiKey: "AIzaSyCJJI6pWI7ENDfmbYwGMbh8SHnlB6QQOHk",
+  authDomain: "trilha-morro-da-mesa-cd2fe.firebaseapp.com",
+  databaseURL: "https://trilha-morro-da-mesa-cd2fe-default-rtdb.firebaseio.com",
+  projectId: "trilha-morro-da-mesa-cd2fe",
+  storageBucket: "trilha-morro-da-mesa-cd2fe.firebasestorage.app",
+  messagingSenderId: "826498874996",
+  appId: "1:826498874996:web:007837e92c11ee4ef4db21",
+  measurementId: "G-KTHERDDMWD"
+};
 
-  if (!aceito) {
-    alert("Você precisa aceitar o termo de responsabilidade.");
-    return;
+// INICIALIZA
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// LER DADOS EM TEMPO REAL
+db.ref("confirmados").on("value", (snapshot)=>{
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  const dados = snapshot.val();
+  let total = 0;
+
+  for (let id in dados) {
+    total++;
+    const li = document.createElement("li");
+    li.textContent = dados[id];
+    lista.appendChild(li);
   }
 
-  if (nome === "") {
-    alert("Digite seu nome.");
-    return;
-  }
-
-  let lista = JSON.parse(localStorage.getItem("listaMorroMesa")) || [];
-  lista.push(nome);
-  localStorage.setItem("listaMorroMesa", JSON.stringify(lista));
-
-  document.getElementById("msg").innerHTML =
-    `<div class="sucesso">✔ Presença confirmada com sucesso!</div>`;
-
-  document.getElementById("nome").value = "";
-  document.getElementById("aceito").checked = false;
-}
+  document.getElementById("contador").innerText =
+      "Total de confirmados: " + total;
+});
 </script>
 
 </body>
 </html>
-
