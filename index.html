@@ -93,7 +93,6 @@
     text-align: center;
     color: #d4edda;
   }
-
 </style>
 </head>
 
@@ -134,6 +133,7 @@
 
 <div id="msg"></div>
 
+<!-- SCRIPT FIREBASE -->
 <script>
 // CONFIG DO FIREBASE
 const firebaseConfig = {
@@ -166,11 +166,14 @@ function salvar() {
     return;
   }
 
+  // SALVA NO FIREBASE
   db.ref("confirmados").push(nome);
 
+  // MENSAGEM
   document.getElementById("msg").innerHTML =
     `<div class="sucesso">✔ Presença confirmada!</div>`;
 
+  // LIMPAR FORMULÁRIO
   document.getElementById("nome").value = "";
   document.getElementById("aceito").checked = false;
 }
