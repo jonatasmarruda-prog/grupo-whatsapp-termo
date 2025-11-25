@@ -3,62 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel de Confirmados - Morro da Mesa</title>
+<title>Painel de Confirmados</title>
+
+<!-- Firebase compat -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
 <style>
   body {
     margin: 0;
-    font-family: "Arial", sans-serif;
+    font-family: Arial, sans-serif;
     background: #0b0b0b;
-    color: #ffffff;
-    padding: 0;
+    color: #fff;
   }
 
   .topo {
     text-align: center;
     padding: 20px;
     background: #111;
-    border-bottom: 2px solid #222;
   }
 
   .logo {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    margin-bottom: 10px;
     cursor: pointer;
   }
 
   h1 {
-    font-size: 22px;
-    margin: 10px 0 5px 0;
+    margin: 10px 0 0;
+    font-size: 24px;
   }
 
   h2 {
-    font-size: 16px;
-    color: #cccccc;
-    margin-top: 0;
+    margin: 5px 0;
+    color: #ccc;
   }
 
-  .contador {
+  #contador {
     font-size: 22px;
-    font-weight: bold;
-    text-align: center;
     margin: 20px 0;
+    text-align: center;
+    font-weight: bold;
   }
 
   .box {
     background: #161616;
-    padding: 15px;
-    border-radius: 12px;
+    padding: 20px;
     margin: 15px;
-    box-shadow: 0 0 10px #000;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    border-radius: 12px;
   }
 
   li {
@@ -68,31 +61,13 @@
     border-radius: 8px;
     font-size: 18px;
     border-left: 4px solid #28a745;
-  }
-
-  button {
-    width: 90%;
-    padding: 14px;
-    border: none;
-    margin: 10px auto;
-    display: block;
-    border-radius: 10px;
-    background: #0066ff;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .limpar {
-    background: #c30000;
+    list-style: none;
   }
 
   .rodape {
     text-align: center;
     padding: 20px;
     color: #aaa;
-    font-size: 16px;
-    margin-top: 15px;
   }
 </style>
 
@@ -100,64 +75,55 @@
 <body>
 
 <div class="topo">
-  <img class="logo" src="https://i.imgur.com/MwHr761.png"
-       onclick="window.location.href='index.html'">
+  <img src="https://i.imgur.com/MwHr761.png" class="logo" onclick="window.location.href='index.html'">
   <h1>Painel de Confirmados</h1>
   <h2>Morro da Mesa - 30 de Novembro</h2>
 </div>
 
-<div class="contador" id="contador">Carregando...</div>
+<div id="contador">Carregando...</div>
 
 <div class="box">
-  <h3>Lista de Participantes</h3>
   <ul id="lista"></ul>
 </div>
-
-<button onclick="baixar()">📥 Baixar lista</button>
-<button class="limpar" onclick="limpar()">🗑 Limpar lista</button>
 
 <div class="rodape">
   Trilheiros de Rondonópolis 🚶‍♂️🌄
 </div>
 
 <script>
-function carregarLista() {
-  let lista = JSON.parse(localStorage.getItem("listaMorroMesa")) || [];
+// CONFIG FIREBASE
+const firebaseConfig = {
+  apiKey: "AIzaSyCJJI6pWI7ENDfmbYwGMbh8SHnlB6QQOHk",
+  authDomain: "trilha-morro-da-mesa-cd2fe.firebaseapp.com",
+  databaseURL: "https://trilha-morro-da-mesa-cd2fe-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "trilha-morro-da-mesa-cd2fe",
+  storageBucket: "trilha-morro-da-mesa-cd2fe.firebasestorage.app",
+  messagingSenderId: "826498874996",
+  appId: "1:826498874996:web:007837e92c11ee4ef4db21",
+  measurementId: "G-KTHERDDMWD"
+};
 
-  document.getElementById("contador").innerHTML =
-    "Total de confirmados: " + lista.length;
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-  let ul = document.getElementById("lista");
-  ul.innerHTML = "";
+// LÊ OS NOMES EM TEMPO REAL
+db.ref("confirmados").on("value", snapshot => {
+  const listaEl = document.getElementById("lista");
+  listaEl.innerHTML = "";
 
-  lista.forEach((nome) => {
-    let li = document.createElement("li");
-    li.textContent = nome;
-    ul.appendChild(li);
-  });
-}
+  const dados = snapshot.val();
+  let total = 0;
 
-function baixar() {
-  let lista = JSON.parse(localStorage.getItem("listaMorroMesa")) || [];
-  let conteudo = lista.join("\n");
-
-  let blob = new Blob([conteudo], { type: "text/plain" });
-  let url = URL.createObjectURL(blob);
-
-  let a = document.createElement("a");
-  a.href = url;
-  a.download = "confirmados-morro-da-mesa.txt";
-  a.click();
-}
-
-function limpar() {
-  if (confirm("Tem certeza que deseja apagar todos os nomes?")) {
-    localStorage.removeItem("listaMorroMesa");
-    carregarLista();
+  for (let id in dados) {
+    total++;
+    const li = document.createElement("li");
+    li.textContent = dados[id];
+    listaEl.appendChild(li);
   }
-}
 
-carregarLista();
+  document.getElementById("contador").innerText =
+    "Total de confirmados: " + total;
+});
 </script>
 
 </body>
