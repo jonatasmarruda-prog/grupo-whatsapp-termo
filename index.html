@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trilha Morro da Mesa - Termo</title>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js"></script>
+<!-- Firebase compatível -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
 <style>
   body {
@@ -134,19 +134,15 @@
 <div class="box">
   <h3>📄 Termo de Responsabilidade</h3>
   <p>
-  • O percurso possui nível médio a avançado, com trechos íngremes, pedras soltas e escorregadios.<br><br>
-  • Uso obrigatório de calçado adequado, água, roupas leves e protetor solar.<br><br>
-  • Proibido o uso de caixas de som.<br>
-  • Proibido bebidas alcoólicas ou energéticos.<br>
-  • Proibido se afastar do grupo ou desobedecer orientações.<br><br>
-  • Respeite a natureza: não deixe lixo.<br><br>
-  • A organização não se responsabiliza por acidentes causados por imprudência.<br><br>
-  • Em caso de chuva ou risco climático, o passeio pode ser adiado.<br><br>
-  • Necessário estar em boas condições de saúde.<br>
-  • Pessoas com problemas cardíacos ou respiratórios não devem participar.<br><br>
-  • Participantes sedentários devem avaliar os riscos antes de confirmar.<br><br>
-  • Crianças menores de 14 anos não podem participar.<br>
-  • Animais domésticos não são permitidos.<br><br>
+    • O percurso possui nível médio a avançado, com trechos íngremes e escorregadios.<br><br>
+    • Uso obrigatório de calçado adequado, água e protetor solar.<br><br>
+    • Proibido caixas de som, energéticos e bebidas alcoólicas.<br><br>
+    • Proibido se afastar do grupo ou desobedecer orientações.<br><br>
+    • Respeite a natureza — não deixe lixo.<br><br>
+    • Não nos responsabilizamos por acidentes por imprudência.<br><br>
+    • Passeio pode ser adiado em caso de chuva forte.<br><br>
+    • Necessário estar em boas condições de saúde.<br><br>
+    • Menores de 14 anos não podem participar.
   </p>
 </div>
 
@@ -170,7 +166,7 @@
 </div>
 
 <script>
-// CONFIG DO FIREBASE
+// Config Firebase (compat)
 const firebaseConfig = {
   apiKey: "AIzaSyCJJI6pWI7ENDfmbYwGMbh8SHnlB6QQOHk",
   authDomain: "trilha-morro-da-mesa-cd2fe.firebaseapp.com",
@@ -182,11 +178,11 @@ const firebaseConfig = {
   measurementId: "G-KTHERDDMWD"
 };
 
-// INICIALIZA FIREBASE
-const app = firebase.initializeApp(firebaseConfig);
+// Inicializar compat
+firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// SALVAR NO FIREBASE
+// Salvar nome
 function salvar() {
   const nome = document.getElementById("nome").value.trim();
   const aceito = document.getElementById("aceito").checked;
@@ -201,11 +197,10 @@ function salvar() {
     return;
   }
 
-  // SALVA NA NUVEM
   db.ref("confirmados").push(nome);
 
   document.getElementById("msg").innerHTML =
-    `<div class="sucesso">✔ Presença confirmada com sucesso!</div>`;
+    `<div class="sucesso">✔ Presença confirmada!</div>`;
 
   document.getElementById("nome").value = "";
   document.getElementById("aceito").checked = false;
