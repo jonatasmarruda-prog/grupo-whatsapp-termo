@@ -21,53 +21,51 @@
     text-align: center;
     padding: 20px;
     background: #111;
+    border-bottom: 2px solid #222;
   }
 
   .logo {
-    width: 90px;
-    height: 90px;
+    width: 95px;
     border-radius: 50%;
     cursor: pointer;
   }
 
   h1 {
     margin: 10px 0 0;
-    font-size: 24px;
+    font-size: 26px;
   }
 
   h2 {
-    margin: 5px 0;
     color: #ccc;
+    margin: 5px 0 15px;
+    font-size: 18px;
   }
 
   #contador {
+    text-align: center;
     font-size: 22px;
     margin: 20px 0;
-    text-align: center;
     font-weight: bold;
   }
 
-  .box {
-    background: #161616;
-    padding: 20px;
-    margin: 15px;
-    border-radius: 12px;
+  .lista-container {
+    padding: 15px;
   }
 
   li {
-    background: #222;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    font-size: 18px;
-    border-left: 4px solid #28a745;
     list-style: none;
+    background: #222;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-left: 4px solid #28a745;
+    border-radius: 10px;
+    font-size: 18px;
   }
 
   .rodape {
     text-align: center;
     padding: 20px;
-    color: #aaa;
+    color: #888;
   }
 </style>
 
@@ -76,13 +74,13 @@
 
 <div class="topo">
   <img src="https://i.imgur.com/MwHr761.png" class="logo" onclick="window.location.href='index.html'">
-  <h1>Painel de Confirmados</h1>
+  <h1>Confirmados</h1>
   <h2>Morro da Mesa - 30 de Novembro</h2>
 </div>
 
 <div id="contador">Carregando...</div>
 
-<div class="box">
+<div class="lista-container">
   <ul id="lista"></ul>
 </div>
 
@@ -91,7 +89,7 @@
 </div>
 
 <script>
-// CONFIG FIREBASE
+// CONFIGURAÇÃO REAL DO FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCJJI6pWI7ENDfmbYwGMbh8SHnlB6QQOHk",
   authDomain: "trilha-morro-da-mesa-cd2fe.firebaseapp.com",
@@ -99,30 +97,31 @@ const firebaseConfig = {
   projectId: "trilha-morro-da-mesa-cd2fe",
   storageBucket: "trilha-morro-da-mesa-cd2fe.firebasestorage.app",
   messagingSenderId: "826498874996",
-  appId: "1:826498874996:web:007837e92c11ee4ef4db21",
-  measurementId: "G-KTHERDDMWD"
+  appId: "1:826498874996:web:007837e92c11ee4ef4db21"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 // LÊ OS NOMES EM TEMPO REAL
-db.ref("confirmados").on("value", snapshot => {
-  const listaEl = document.getElementById("lista");
-  listaEl.innerHTML = "";
+db.ref("confirmados").on("value", (snapshot) => {
+
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
 
   const dados = snapshot.val();
   let total = 0;
 
   for (let id in dados) {
     total++;
+
     const li = document.createElement("li");
     li.textContent = dados[id];
-    listaEl.appendChild(li);
+    lista.appendChild(li);
   }
 
   document.getElementById("contador").innerText =
-    "Total de confirmados: " + total;
+    "Total confirmados: " + total;
 });
 </script>
 
