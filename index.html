@@ -3,55 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel de Confirmados</title>
+<title>Trilha Morro da Mesa - Termo</title>
 
-<!-- Firebase compat (FUNCIONA) -->
+<!-- Firebase compatível (FUNCIONA) -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
 <style>
   body {
+    margin: 0;
+    font-family: Arial, sans-serif;
     background: #0b0b0b;
     color: #fff;
-    font-family: Arial;
-    margin: 0;
   }
+
   .topo {
     text-align: center;
     padding: 20px;
-    background:#111;
+    background: #111;
   }
-  .logo {
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    cursor:pointer;
-  }
-  li {
-    background:#222;
-    padding:12px;
-    margin:10px;
-    border-radius:8px;
-    font-size:18px;
-    border-left:4px solid #28a745;
-  }
-</style>
 
+  .logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  h1 {
+    margin: 10px 0 5px;
+  }
+
+  h2 {
+    color: #ccc;
+    margin: 0;
+  }
+
+  .alerta {
+    background: #b30000;
+    padding: 12px;
+    margin: 15px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .box {
+    background: #161616;
+    margin: 15px;
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+  .aceite-area {
+    margin: 20px;
+  }
+
+  input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 10px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    background: #222;
+    color: #fff;
+  }
+
+  button {
+    width: 90%;
+    display: block;
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 12px;
+    border: none;
+    background: #28a745;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .sucesso {
+    margin: 20px;
+    background: #155724;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    color: #d4edda;
+  }
+
+</style>
 </head>
+
 <body>
 
 <div class="topo">
-  <img class="logo" src="https://i.imgur.com/MwHr761.png"
-       onclick="window.location.href='index.html'">
-  <h1>Painel de Confirmados</h1>
+  <img src="https://i.imgur.com/MwHr761.png" class="logo" onclick="window.location.href='painel.html'">
+  <h1>Trilha Morro da Mesa</h1>
+  <h2>30 de Novembro</h2>
 </div>
 
-<h2 id="contador" style="text-align:center;"></h2>
+<div class="alerta">
+  ⚠ ESTE PASSEIO É EM GRUPO — VAMOS TODOS JUNTOS!
+</div>
 
-<ul id="lista"></ul>
+<div class="box">
+  <h3>📄 Termo de Responsabilidade</h3>
+  <p>
+    • Nível médio a avançado, com trechos íngremes e escorregadios.<br><br>
+    • Obrigatório calçado adequado, água e protetor solar.<br><br>
+    • Proibido bebidas alcoólicas, energéticos e caixas de som.<br><br>
+    • Proibido se afastar do grupo.<br><br>
+    • Não deixe lixo.<br><br>
+    • Passeio pode ser adiado por clima.<br><br>
+    • Menores de 14 não podem participar.
+  </p>
+</div>
+
+<div class="aceite-area">
+  <label><input type="checkbox" id="aceito"> Li e aceito o termo.</label>
+</div>
+
+<div class="aceite-area">
+  <input type="text" id="nome" placeholder="Digite seu nome completo">
+</div>
+
+<button onclick="salvar()">Confirmar Presença</button>
+
+<div id="msg"></div>
 
 <script>
-// CONFIG FIREBASE
+// CONFIG DO FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCJJI6pWI7ENDfmbYwGMbh8SHnlB6QQOHk",
   authDomain: "trilha-morro-da-mesa-cd2fe.firebaseapp.com",
@@ -63,34 +147,33 @@ const firebaseConfig = {
   measurementId: "G-KTHERDDMWD"
 };
 
-// INICIALIZA FIREBASE (compat)
+// INICIALIZA
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// LER DADOS EM TEMPO REAL
-db.ref("confirmados").on("value", (snapshot)=>{
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
+// SALVAR NOME
+function salvar() {
+  const nome = document.getElementById("nome").value.trim();
+  const aceito = document.getElementById("aceito").checked;
 
-  const dados = snapshot.val();
-  let total = 0;
-
-  if (!dados) {
-    document.getElementById("contador").innerText =
-      "Total de confirmados: 0";
+  if (!aceito) {
+    alert("Você precisa aceitar o termo.");
     return;
   }
 
-  for (let id in dados) {
-    total++;
-    const li = document.createElement("li");
-    li.textContent = dados[id];
-    lista.appendChild(li);
+  if (nome === "") {
+    alert("Digite seu nome.");
+    return;
   }
 
-  document.getElementById("contador").innerText =
-      "Total de confirmados: " + total;
-});
+  db.ref("confirmados").push(nome);
+
+  document.getElementById("msg").innerHTML =
+    `<div class="sucesso">✔ Presença confirmada!</div>`;
+
+  document.getElementById("nome").value = "";
+  document.getElementById("aceito").checked = false;
+}
 </script>
 
 </body>
