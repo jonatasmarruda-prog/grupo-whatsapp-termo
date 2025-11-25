@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trilha Morro da Mesa - Termo</title>
 
-<!-- Firebase compatível (FUNCIONA) -->
+<!-- Firebase compatível -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
@@ -19,24 +19,26 @@
 
   .topo {
     text-align: center;
-    padding: 20px;
+    padding: 25px 10px;
     background: #111;
   }
 
   .logo {
-    width: 90px;
-    height: 90px;
+    width: 95px;
+    height: 95px;
     border-radius: 50%;
     cursor: pointer;
   }
 
   h1 {
-    margin: 10px 0 5px;
+    margin: 10px 0 0;
+    font-size: 26px;
   }
 
   h2 {
+    margin: 5px 0;
     color: #ccc;
-    margin: 0;
+    font-size: 18px;
   }
 
   .alerta {
@@ -45,17 +47,22 @@
     margin: 15px;
     border-radius: 10px;
     text-align: center;
+    font-size: 16px;
+    font-weight: bold;
   }
 
   .box {
     background: #161616;
     margin: 15px;
-    padding: 18px;
-    border-radius: 10px;
+    padding: 20px;
+    border-radius: 12px;
+    line-height: 1.6;
+    font-size: 17px;
   }
 
   .aceite-area {
-    margin: 20px;
+    margin: 20px 15px;
+    font-size: 17px;
   }
 
   input[type="checkbox"] {
@@ -66,34 +73,47 @@
   input[type="text"] {
     width: 100%;
     padding: 14px;
+    margin-top: 10px;
     border-radius: 10px;
     border: none;
     background: #222;
     color: #fff;
+    font-size: 17px;
   }
 
   button {
     width: 90%;
-    display: block;
     padding: 15px;
-    margin: 20px auto;
-    border-radius: 12px;
     border: none;
+    border-radius: 12px;
     background: #28a745;
     color: #fff;
     font-size: 20px;
     font-weight: bold;
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
   }
 
   .sucesso {
-    margin: 20px;
-    background: #155724;
+    width: 90%;
+    margin: 20px auto;
     padding: 15px;
+    background: #155724;
     border-radius: 10px;
     text-align: center;
     color: #d4edda;
+    font-size: 17px;
+  }
+
+  .rodape {
+    text-align: center;
+    padding: 25px;
+    color: #888;
+    font-size: 16px;
   }
 </style>
+
 </head>
 
 <body>
@@ -110,36 +130,46 @@
 
 <div class="box">
   <h3>📄 Termo de Responsabilidade</h3>
+
   <p>
-    • Nível médio a avançado, com trechos íngremes e escorregadios.<br><br>
-    • Obrigatório calçado adequado, água e protetor solar.<br><br>
-    • Proibido bebidas alcoólicas, energéticos e caixas de som.<br><br>
-    • Proibido se afastar do grupo.<br><br>
-    • Não deixe lixo.<br><br>
-    • Passeio pode ser adiado por clima.<br><br>
-    • Menores de 14 não podem participar.
+  - O percurso tem nível médio a avançado, com trechos íngremes e escorregadios.<br><br>
+  - É obrigatório o uso de calçados adequados, água, protetor solar e roupas confortáveis.<br><br>
+  - É proibido o uso de caixas de som para preservar o ambiente.<br><br>
+  - O participante deve respeitar a natureza, não deixar lixo e seguir as orientações do guia.<br><br>
+  - A organização não se responsabiliza por acidentes causados por imprudência ou desrespeito às regras.<br><br>
+  - Em caso de condições climáticas adversas, o passeio poderá ser cancelado ou adiado.<br><br>
+  - É indispensável estar em boas condições de saúde para participar da trilha.<br><br>
+  - Pessoas com problemas cardíacos, respiratórios, mobilidade reduzida ou com histórico de desmaios/síncopes não são orientadas a realizar essa atividade.<br><br>
+  - Participantes sedentários ou sem preparo físico devem avaliar cuidadosamente os riscos antes de confirmar presença.<br><br>
+  - Crianças menores de 14 anos não serão permitidas.<br><br>
   </p>
 </div>
 
 <div class="aceite-area">
-  <label><input type="checkbox" id="aceito"> Li e aceito o termo.</label>
+  <label>
+    <input type="checkbox" id="aceito"> Li e aceito o termo de responsabilidade.
+  </label>
 </div>
 
 <div class="aceite-area">
-  <input type="text" id="nome" placeholder="Digite seu nome completo">
+  <h3>✍️ Digite seu nome completo</h3>
+  <input type="text" id="nome" placeholder="Seu nome aqui">
 </div>
 
 <button onclick="salvar()">Confirmar Presença</button>
 
 <div id="msg"></div>
 
-<!-- SCRIPT FIREBASE -->
+<div class="rodape">
+  Trilheiros de Rondonópolis 🚶‍♂️🌄
+</div>
+
 <script>
-// CONFIG DO FIREBASE
+// CONFIG FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCJJI6pWI7ENDfmbYwGMbh8SHnlB6QQOHk",
   authDomain: "trilha-morro-da-mesa-cd2fe.firebaseapp.com",
-  databaseURL: "https://trilha-morro-da-mesa-cd2fe-default-rtdb.firebaseio.com",
+  databaseURL: "https://trilha-morro-da-mesa-cd2fe-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "trilha-morro-da-mesa-cd2fe",
   storageBucket: "trilha-morro-da-mesa-cd2fe.firebasestorage.app",
   messagingSenderId: "826498874996",
@@ -147,11 +177,10 @@ const firebaseConfig = {
   measurementId: "G-KTHERDDMWD"
 };
 
-// INICIALIZA
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// SALVAR NOME
+// SALVAR NO FIREBASE
 function salvar() {
   const nome = document.getElementById("nome").value.trim();
   const aceito = document.getElementById("aceito").checked;
@@ -166,14 +195,11 @@ function salvar() {
     return;
   }
 
-  // SALVA NO FIREBASE
   db.ref("confirmados").push(nome);
 
-  // MENSAGEM
   document.getElementById("msg").innerHTML =
-    `<div class="sucesso">✔ Presença confirmada!</div>`;
+    `<div class="sucesso">✔ Presença confirmada com sucesso!</div>`;
 
-  // LIMPAR FORMULÁRIO
   document.getElementById("nome").value = "";
   document.getElementById("aceito").checked = false;
 }
